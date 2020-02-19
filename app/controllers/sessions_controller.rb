@@ -2,8 +2,9 @@ class SessionsController < ApplicationController
   # skip_before_action :authorized, only: [:new, :create, :welcome]
   def new
     if session[:user_id] && !User.find_by(id: session[:user_id]).nil?
-      redirect_to '/welcome'
+      return redirect_to '/welcome'
     end
+    @user = User.new
   end
 
   def create # user login, create user session
@@ -12,7 +13,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to '/welcome'
     else
-      redirect_to '/login'
+      render 'new'
     end
   end
 
