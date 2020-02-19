@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def test
-
+  def me
+    @user = User.find(session[:user_id])
   end
 end
