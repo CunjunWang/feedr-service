@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:new, :create]
+  # skip_before_action :authorized, only: [:new, :create]
 
   def new
     if session[:user_id] and !User.find(session[:user_id]).nil?
