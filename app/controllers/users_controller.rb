@@ -18,4 +18,8 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+
+  def test
+
+  end
 end
