@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_012745) do
+ActiveRecord::Schema.define(version: 2020_02_22_045339) do
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "order_no", null: false
+    t.integer "item_id", null: false
+    t.string "item_name", default: "2", null: false
+    t.decimal "item_price", precision: 6, scale: 2, null: false
+    t.integer "quantity", default: 1, null: false
+    t.string "img_url"
+    t.boolean "is_del", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "idx_order_id"
+    t.index ["order_no"], name: "idx_order_no"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "order_no", null: false
+    t.string "truck_id", null: false
+    t.string "user_id", null: false
+    t.integer "order_status", default: 2, null: false
+    t.decimal "order_subtotal", precision: 6, scale: 2, null: false
+    t.boolean "is_del", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_no"], name: "unique_idx_order_no", unique: true
+    t.index ["truck_id"], name: "idx_truck_id"
+    t.index ["user_id"], name: "idx_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
