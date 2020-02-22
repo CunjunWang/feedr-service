@@ -18,7 +18,30 @@
   </div>
   <div class="col-md-9">
     <h1>
-      <%= link_to 'My Order', '/orders/my' %>
+      <%= link_to 'My Orders', '/orders/my' %>
     </h1>
+
+
+    <h1>
+      My Trucks <%= link_to 'Create a Food Truck', '/foodtrucks/new', class: 'btn btn-primary' %>
+    </h1>
+    <% if @foodtrucks.any? %>
+      <% @foodtrucks.each do |foodtruck| %>
+        <tr>
+          <td><%= foodtruck.Name %></td>
+          <td><%= foodtruck.Type %></td>
+          <td><%= foodtruck.Address %></td>
+          <td><%= link_to 'Show', foodtruck_path(foodtruck) %></td>
+          <td><%= link_to 'Edit', edit_foodtruck_path(foodtruck) %></td>
+          <td><%= link_to 'Destroy', foodtruck_path(foodtruck),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'} %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      You don't have any truck, why not <%= link_to 'Create one', '/foodtrucks/new' %>?
+    <% end %>
+
+
   </div>
 </div>

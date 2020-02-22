@@ -1,44 +1,47 @@
 <%= form_with scope: :foodtruck, url: foodtrucks_path, local: true do |form| %>
 
-    <% if @foodtruck.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@foodtruck.errors.count, "error") %> prohibited
-          this foodtruck from being saved:
-        </h2>
-        <ul>
-          <% @foodtruck.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <p>
-      <%= form.label :Name %><br>
-      <%= form.text_field :Name %>
-    </p>
-
-    <p>
-        <%= form.label :Type %><br>
-        <%= form.select :Type, ['American', 'Chinese']%>
-    </p>
-
-    <p>
-      <%= form.label :Address%><br>
-      <%= form.text_area :Address %>
-    </p>
-   
-    <p>
-      <%= form.label :Description %><br>
-      <%= form.text_area :Description %>
-    </p>
-
-    <p>
-      <%= form.label :Owner %><br>
-      <%= form.text_field :Owner %>
-    </p>
-   
-    <p>
-      <%= form.submit %>
-    </p>
+  <% if @foodtruck.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@foodtruck.errors.count, "error") %> prohibited
+        this foodtruck from being saved:
+      </h2>
+      <ul>
+        <% @foodtruck.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
+  <p>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </p>
+  <p>
+    <%= form.label :Name %><br>
+    <%= form.text_field :Name %>
+  </p>
+
+  <p>
+    <%= form.label :Type %><br>
+    <%= form.select :Type, ['American', 'Chinese'] %>
+  </p>
+
+  <p>
+    <%= form.label :Address %><br>
+    <%= form.text_area :Address %>
+  </p>
+
+  <p>
+    <%= form.label :Description %><br>
+    <%= form.text_area :Description %>
+  </p>
+
+  <p>
+    <%= form.label :Owner %><br>
+    <%= form.text_field :Owner %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
