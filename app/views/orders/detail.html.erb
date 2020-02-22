@@ -1,3 +1,23 @@
 <title>Order Detail</title>
-<h2>Order Detail</h2>
+<h2><%= "Detail for #{@order.order_no}" %></h2>
 
+<h3> Order Information: </h3>
+<div>
+  <p> Truck: TODO </p>
+  <p> Truck Logo Image: TODO </p>
+  <p><%= "Order no: #{@order.order_no}" %></p>
+  <p><%= "Order status: #{@order.order_status}" %></p>
+  <p><%= "Order Subtotal: #{@order.order_subtotal}" %></p>
+  <p><%= "Created at: #{@order.created_at}" %></p>
+</div>
+
+<h3> Items: </h3>
+<% @items.each_with_index do |item, index| %>
+  <div>
+    <p> Item Image: TODO </p>
+    <p><%= "Item Number: #{index + 1}" %></p>
+    <p><%= "Item Name: #{item.item_name}" %></p>
+    <p><%= "Item Price: #{item.item_price}" %></p>
+    <p><%= "Quantity: #{item.quantity}" %></p>
+  </div>
+<% end %>
