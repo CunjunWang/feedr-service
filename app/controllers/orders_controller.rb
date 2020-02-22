@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   # My order
   def my
     # check login status
-    user_id = current_user.user_id
+    user_id = current_user.id
     @orders = Order.where("user_id = #{user_id}")
     logger.info "Find #{@orders.length} orders"
   end
