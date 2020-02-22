@@ -1,0 +1,23 @@
+<p>
+  <strong>Name:</strong>
+  <%= @foodtruck.Name %>
+</p>
+ 
+<p>
+  <strong>Type_of_Cusine:</strong>
+  <%= @foodtruck.Type %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @foodtruck.Address %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @foodtruck.Description %>
+</p>
+
+<h2>Menu</h2>
+<%= render @foodtruck.menuitems %>
+

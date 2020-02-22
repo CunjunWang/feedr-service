@@ -12,6 +12,26 @@
 
 ActiveRecord::Schema.define(version: 2020_02_22_175938) do
 
+  create_table "foodtrucks", force: :cascade do |t|
+    t.string "Name"
+    t.string "Type"
+    t.text "Address"
+    t.text "Description"
+    t.string "Owner"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "menuitems", force: :cascade do |t|
+    t.string "Name"
+    t.text "Description"
+    t.decimal "price"
+    t.integer "foodtruck_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["foodtruck_id"], name: "index_menuitems_on_foodtruck_id"
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id", null: false
     t.string "order_no", null: false
@@ -56,4 +76,5 @@ ActiveRecord::Schema.define(version: 2020_02_22_175938) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "menuitems", "foodtrucks"
 end

@@ -1,0 +1,24 @@
+<p>
+  <strong>Name:</strong>
+  <%= menuitem.Name %>
+</p>
+ 
+<p>
+  <strong>Description:</strong>
+  <%= menuitem.Description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= menuitem.price %>
+</p>
+
+<p>
+  <%= link_to 'Edit', edit_foodtruck_menuitem_path(menuitem.foodtruck, menuitem) %>
+</p>
+
+<p>
+  <%= link_to 'Destroy Menuitem', [menuitem.foodtruck, menuitem],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

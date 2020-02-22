@@ -1,14 +1,16 @@
-<h1>Login</h1>
-<%= form_tag '/login' do %>
-  <div class="form-group">
-    <%= label_tag :email%>
-    <%= text_field_tag :email, '', class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :password%>
-    <%= password_field_tag :password, '', class: 'form-control'%>
-  </div>
-  <%= submit_tag "Login", class: "btn btn-default"%>
+<div style="width: 30%; margin: auto">
+  <h1>Login</h1>
+  <%= form_tag '/login' do %>
+    <div class="form-group">
+      <%= label_tag :email %>
+      <%= text_field_tag :email, '', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, '', class: 'form-control' %>
+    </div>
+    <%= submit_tag "Login", class: "btn btn-default" %>
 
-  <%= link_to 'Sign up', new_user_path,class: "btn btn-link" %>
-<%end%>
+    <%= link_to 'Sign up', new_user_path, class: "btn btn-link" %>
+  <% end %>
+</div>
