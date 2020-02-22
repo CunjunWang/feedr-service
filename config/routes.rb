@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resource :orders
   get '/orders/my', to: 'orders#my'
   get '/orders/detail/:order_no', to: 'orders#detail'
+  get '/orders/checkout', to: 'orders#checkout'
+  post '/orders/create', to: 'orders#place'
 end

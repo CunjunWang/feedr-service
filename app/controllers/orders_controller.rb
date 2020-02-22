@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+  # My order
   def my
     # check login status
     # unless logged_in?
@@ -12,6 +13,7 @@ class OrdersController < ApplicationController
     logger.info "Find #{@orders.length} orders"
   end
 
+  # Order detail
   def detail
     order_no = params[:order_no]
     logger.info "Querying detail for order [#{order_no}]"
@@ -29,5 +31,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  # Checkout
+  def checkout
+    logger.info 'Run here in checkout'
+  end
+
+  # Place order
+  def place
+    logger.info 'Run here in place order'
+    redirect_to '/orders/my'
+  end
 
 end
