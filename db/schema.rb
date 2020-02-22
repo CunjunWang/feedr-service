@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_045339) do
+ActiveRecord::Schema.define(version: 2020_02_22_175938) do
 
   create_table "order_items", force: :cascade do |t|
     t.integer "order_id", null: false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2020_02_22_045339) do
     t.boolean "is_del", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "truck_name", default: "", null: false
+    t.string "truck_img"
     t.index ["order_no"], name: "unique_idx_order_no", unique: true
     t.index ["truck_id"], name: "idx_truck_id"
     t.index ["user_id"], name: "idx_user_id"
