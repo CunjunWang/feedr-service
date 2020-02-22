@@ -1,9 +1,9 @@
-<%= link_to "Back", user_path %>
+<%= link_to "Back", request.referer.present? ? request.referer : default_path, class: "btn btn-link" %>
 <p>
   <strong>Name:</strong>
   <%= @foodtruck.Name %>
 </p>
- 
+
 <p>
   <strong>Type_of_Cusine:</strong>
   <%= @foodtruck.Type %>

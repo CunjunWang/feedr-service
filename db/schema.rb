@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 2020_02_22_182737) do
     t.text "Address"
     t.text "Description"
     t.string "Owner"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "menuitems", force: :cascade do |t|
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2020_02_22_182737) do
     t.boolean "is_del", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "truck_name", default: "", null: false
+    t.string "truck_img"
     t.index ["order_no"], name: "unique_idx_order_no", unique: true
     t.index ["truck_id"], name: "idx_truck_id"
     t.index ["user_id"], name: "idx_user_id"

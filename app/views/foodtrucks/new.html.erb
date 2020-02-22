@@ -1,3 +1,4 @@
+<%= link_to "Back", request.referer.present? ? request.referer : default_path, class: "btn btn-link" %>
 <%= form_with scope: :foodtruck, url: foodtrucks_path, local: true do |form| %>
 
   <% if @foodtruck.errors.any? %>
