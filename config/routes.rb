@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   post '/orders/create', to: 'orders#place'
 
   resources :foodtrucks do
-    resources :menuitems
+    resources :menuitems do
+      get 'add', to: 'menuitems#add'
+      get 'remove', to: 'menuitems#remove'
+    end
   end
 
 end
