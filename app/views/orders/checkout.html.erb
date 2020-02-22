@@ -1,4 +1,4 @@
-<h2>Checkout</h2>
+<h2>Checkout Page</h2>
 
 <div>
   <h3>Truck: <%= @truck_info[:truck_name] %></h3>
@@ -15,5 +15,5 @@
 
 <div>
   <h3><%= "Order Subtotal: $ #{@order_subtotal}" %></h3>
-  <%= link_to 'Checkout', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal), method: :post %>
+  <%= link_to 'Place Order!', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal), method: :post %>
 </div>

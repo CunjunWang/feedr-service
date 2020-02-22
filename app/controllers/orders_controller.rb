@@ -35,8 +35,8 @@ class OrdersController < ApplicationController
         {item_id: 1, item_name: 'Fried Eggplant', item_price: 9.50, quantity: 2, item_img: ''},
         {item_id: 6, item_name: 'Iced Hazelnut Coffee', item_price: 2.32, quantity: 1, item_img: ''}
     ]
-    @truck_info = session[:truck_info] if session[:truck_info]
-    @item_list = session[:item_list] if session[:item_list]
+    @truck_info = session[:foodtruck] if session[:foodtruck]
+    @item_list = session[:items] if session[:items]
     @order_subtotal = 0
   end
 
@@ -64,6 +64,7 @@ class OrdersController < ApplicationController
       new_order[:order_subtotal] = @order_subtotal
       new_order[:order_status] = 2
       new_order[:user_id] = @user_id
+      # replace the order object with the result of db insertion to get id
       new_order = Order.create(new_order)
 
       # 2. get id after saving to the db
