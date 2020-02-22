@@ -32,7 +32,7 @@
       <%= f.text_field :phone, class: 'form-control' %>
     </div>
     <%= f.submit 'Save', class: "btn btn-default" %>
-    <%= link_to 'Back', @user, class: "btn btn-link" %>
+    <%= link_to "Back", request.referer.present? ? request.referer : default_path, class: "btn btn-link" %>
   <% end %>
 
 </div>

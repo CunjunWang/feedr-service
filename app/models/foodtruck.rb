@@ -4,4 +4,5 @@ class Foodtruck < ApplicationRecord
     validates :Type, presence: true
     validates :Address, presence: true
     validates :Owner, presence: true
+    validates :user_id, presence: true
 end

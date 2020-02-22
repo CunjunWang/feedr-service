@@ -1,11 +1,19 @@
 <h2>Checkout</h2>
 
 <div>
-  <h3>Truck Name</h3>
+  <h3>Truck: <%= @truck_info[:truck_name] %></h3>
   <h3>Items</h3>
+  <% @item_list.each_with_index do |item, index| %>
+    <div>
+      <h4><%= "Item #{index + 1}: #{item[:item_name]}" %></h4>
+      <p><%= "Price: $ #{item[:item_price]}" %></p>
+      <p><%= "Quantity: #{item[:quantity]}" %></p>
+      <p><%= "Item Subtotal: $ #{calculate_item_subtotal item[:item_price], item[:quantity]}" %></p>
+    </div>
+  <% end %>
 </div>
 
 <div>
-  <h3> Subtotal: </h3>
-  <%= link_to "Checkout", '/orders/create', method: :post %>
+  <h3><%= "Order Subtotal: $ #{@order_subtotal}" %></h3>
+  <%= link_to 'Checkout', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal), method: :post %>
 </div>
