@@ -1,0 +1,36 @@
+<h1>Edit Profile</h1>
+
+<%= form_for @user do |f|%>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+
+      <% @user.errors.full_messages.each do |msg| %>
+        <div class="alert alert-danger" role="alert"><%= msg %></div>
+      <% end %>
+
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :email%>
+    <%= f.email_field :email, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :password%>
+    <%= f.password_field :password, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :first_name%>
+    <%= f.text_field :first_name, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name%>
+    <%= f.text_field :last_name, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone%>
+    <%= f.text_field :phone, class: 'form-control'%>
+  </div>
+  <%= f.submit 'Save', class: "btn btn-default" %>
+  <%= link_to 'Back', @user, class: "btn btn-link" %>
+<%end%>
+
