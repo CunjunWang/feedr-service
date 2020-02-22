@@ -3,12 +3,7 @@ class OrdersController < ApplicationController
   # My order
   def my
     # check login status
-    # unless logged_in?
-    #   redirect_to '/login'
-    #   return
-    # end
-    # user_id = session[:user_id]
-    user_id = 2
+    user_id = current_user.user_id
     @orders = Order.where("user_id = #{user_id}")
     logger.info "Find #{@orders.length} orders"
   end
