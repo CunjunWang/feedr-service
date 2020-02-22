@@ -29,14 +29,10 @@ class OrdersController < ApplicationController
   # Checkout
   def checkout
     logger.info 'Run here in checkout'
-    @user = current_user
-    @truck_info = {truck_name: 'Test Truck 1', truck_id: 1, truck_img: ''}
-    @item_list = [
-        {item_id: 1, item_name: 'Fried Eggplant', item_price: 9.50, quantity: 2, item_img: ''},
-        {item_id: 6, item_name: 'Iced Hazelnut Coffee', item_price: 2.32, quantity: 1, item_img: ''}
-    ]
-    @truck_info = session[:foodtruck] if session[:foodtruck]
-    @item_list = session[:items] if session[:items]
+    @truck_info = session[:foodtruck]
+    # logger.info "@truck_info: #{@truck_info}"
+    @item_list = session[:items]
+    # logger.info "session items: #{session["items"]}"
     @order_subtotal = 0
   end
 
@@ -46,7 +42,7 @@ class OrdersController < ApplicationController
     logger.info "API Params: #{params}"
     @truck = params[:truck]
     @item_list = params[:items]
-    @user_id = params[:user].to_i
+    @user_id = current_user.id
     @order_subtotal = params[:subtotal].to_f
 
     # generate order no

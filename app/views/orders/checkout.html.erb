@@ -1,14 +1,14 @@
 <h2>Checkout Page</h2>
 
 <div>
-  <h3>Truck: <%= @truck_info[:truck_name] %></h3>
+  <h3><%= "Truck: #{@truck_info["truck_name"]}" %></h3>
   <h3>Items</h3>
   <% @item_list.each_with_index do |item, index| %>
     <div>
-      <h4><%= "Item #{index + 1}: #{item[:item_name]}" %></h4>
-      <p><%= "Price: $ #{item[:item_price]}" %></p>
-      <p><%= "Quantity: #{item[:quantity]}" %></p>
-      <p><%= "Item Subtotal: $ #{calculate_item_subtotal item[:item_price], item[:quantity]}" %></p>
+      <h4><%= "Item #{index + 1}: #{item["item_name"]}" %></h4>
+      <p><%= "Price: $ #{item["item_price"]}" %></p>
+      <p><%= "Quantity: #{item["quantity"]}" %></p>
+      <p><%= "Item Subtotal: $ #{calculate_item_subtotal item["item_price"].to_f, item["quantity"].to_i}" %></p>
     </div>
   <% end %>
 </div>

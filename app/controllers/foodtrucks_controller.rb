@@ -12,14 +12,16 @@ class FoodtrucksController < ApplicationController
   end
 
 
-    def show
-        @foodtruck = Foodtruck.find(params[:id])
-        session[:foodtruck] = {}
-        session[:foodtruck][:truck_id] = @foodtruck.id
-        session[:foodtruck][:truck_name] = @foodtruck.Name
-        session[:items] = []
-        session[:foodtruck][:truck_img] = ""
+  def show
+    @foodtruck = Foodtruck.find(params[:id])
+    session[:foodtruck] = {}
+    session[:foodtruck][:truck_id] = @foodtruck.id
+    session[:foodtruck][:truck_name] = @foodtruck.Name
+    if session[:item].nil? || session[:item].empty?
+      session[:items] = []
     end
+    session[:foodtruck][:truck_img] = ""
+  end
 
 
   def create

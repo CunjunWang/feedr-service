@@ -27,10 +27,15 @@ class MenuitemsController < ApplicationController
         found = 0
         @foodtruck = Foodtruck.find_by(params[:foodtruck_id])
         @menuitem = @foodtruck.menuitems.find(params[:menuitem_id])
-        
+
+        logger.info "menu item id: #{@menuitem[:id]}"
+        logger.info "In add: session items = #{session[:items]}"
+
         session[:items].each do |item|
-            if @menuitem.id.to_s == item[:item_id].to_s
-                item[:quantity] += 1
+            logger.info "menuitem name: #{@menuitem[:Name]}"
+            logger.info "item name: #{item["item_name"]}"
+            if @menuitem[:Name].eql? item["item_name"]
+                item["quantity"] += 1
                 found = 1
             end
         end
@@ -43,21 +48,32 @@ class MenuitemsController < ApplicationController
             new_item[:quantity] = 1
             session[:items].push(new_item)
         end
-        redirect_to  "/foodtrucks/#{params[:foodtruck_id]}"
+
+        logger.info "In add before redirect: session items = #{session[:items]}"
+
+        # render  "/foodtrucks/#{params[:foodtruck_id]}"
+        render '/foodtrucks/show'
     end
-    
+
     def remove
         @foodtruck = Foodtruck.find_by(params[:foodtruck_id])
         @menuitem = @foodtruck.menuitems.find(params[:menuitem_id])
+
+        # logger.info "In remove: session items = #{session[:items]}"
+
         session[:items].each do |item|
-            if @menuitem.id.to_s == item[:id].to_s
-                item[:quantity] -= 1
-                if item[:quantity] == 0
+            if @menuitem[:Name].eql? item["item_name"]
+                item["quantity"] -= 1
+                if item["quantity"] == 0
                     session[:items].delete(item)
                 end
             end
         end
-        redirect_to  "/foodtrucks/#{params[:foodtruck_id]}"
+
+        logger.info "After remove: session items = #{session[:items]}"
+
+        # redirect_to  "/foodtrucks/#{params[:foodtruck_id]}"
+        render '/foodtrucks/show'
     end
 
     private
