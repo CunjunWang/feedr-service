@@ -6,7 +6,7 @@ class CreateFoodtrucks < ActiveRecord::Migration[6.0]
       t.text :Address
       t.text :Description
       t.string :Owner
-
+      t.integer :user_id
       t.timestamps
     end
   end

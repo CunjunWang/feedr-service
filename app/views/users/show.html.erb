@@ -18,7 +18,39 @@
   </div>
   <div class="col-md-9">
     <h1>
-      <%= link_to 'My Order', '/orders/my' %>
+      My Orders <%= link_to "Show All #{@orders.length} Orders", '/orders/my', class: 'btn btn-primary' %>
     </h1>
+    <% (@orders.length > 2 ? @orders[0..1] : @orders).each do |order| %>
+      <div>
+        <p><%= "Truck: #{order.truck_id}" %></p>
+        <%= link_to "Order no: #{order.order_no}", "/orders/detail/#{order.order_no}" %>
+        <p><%= "Order status: #{transform_order_status order.order_status}" %></p>
+        <p><%= "Order Subtotal: $ #{order.order_subtotal}" %></p>
+        <p><%= "Created at: #{order.created_at}" %></p>
+        <br>
+      </div>
+    <% end %>
+
+    <h1>
+      My Trucks <%= link_to 'Create a Food Truck', '/foodtrucks/new', class: 'btn btn-primary' %>
+    </h1>
+    <% if @foodtrucks.any? %>
+      <% @foodtrucks.each do |foodtruck| %>
+        <tr>
+          <td><%= foodtruck.Name %></td>
+          <td><%= foodtruck.Type %></td>
+          <td><%= foodtruck.Address %></td>
+          <td><%= link_to 'Show', foodtruck_path(foodtruck) %></td>
+          <td><%= link_to 'Edit', edit_foodtruck_path(foodtruck) %></td>
+          <td><%= link_to 'Destroy', foodtruck_path(foodtruck),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'} %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      You don't have any truck, why not <%= link_to 'Create one', '/foodtrucks/new' %>?
+    <% end %>
+
+
   </div>
 </div>

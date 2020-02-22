@@ -18,6 +18,14 @@
 </p>
 
 <p>
+  <%= link_to 'Add to Order', foodtruck_menuitem_add_path(menuitem.foodtruck, menuitem) %>
+</p>
+
+<p>
+  <%= link_to 'Remove from Order', foodtruck_menuitem_remove_path(menuitem.foodtruck, menuitem) %>
+</p>
+
+<p>
   <%= link_to 'Destroy Menuitem', [menuitem.foodtruck, menuitem],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>

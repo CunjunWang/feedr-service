@@ -1,1 +1,18 @@
-<h1>Welcome</h1>
+<h1>Listing Foodtrucks</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Address</th>
+    <th></th>
+  </tr>
+
+  <% @foodtrucks.each do |foodtruck| %>
+    <tr>
+      <td><%= foodtruck.Name %></td>
+      <td><%= foodtruck.Type %></td>
+      <td><%= foodtruck.Address %></td>
+      <td><%= link_to 'Show', foodtruck_path(foodtruck) %></td>
+    </tr>
+  <% end %>
+</table>

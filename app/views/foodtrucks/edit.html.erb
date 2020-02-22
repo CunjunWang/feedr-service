@@ -1,3 +1,4 @@
+<%= link_to "Back", request.referer.present? ? request.referer : default_path, class: "btn btn-link" %>
 <h1>Edit Foodtruck</h1>
 <%= form_with(model: @foodtruck, local: true) do |form| %>
 

@@ -19,6 +19,11 @@ class SessionsController < ApplicationController
   end
 
   def welcome;
+    @foodtrucks = if !logged_in?
+                    Foodtruck.all
+                  else
+                    Foodtruck.where('user_id != ?', current_user.id)
+                  end
   end
 
   def logout
