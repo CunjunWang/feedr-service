@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   get 'welcome', to: 'sessions#welcome'
   get 'logout', to: 'sessions#logout'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resource :orders
+  get 'my_orders', to: 'orders#my'
 end
