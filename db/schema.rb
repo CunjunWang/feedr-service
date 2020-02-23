@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_175938) do
+ActiveRecord::Schema.define(version: 2020_02_23_021217) do
 
   create_table "foodtrucks", force: :cascade do |t|
     t.string "Name"
@@ -46,6 +46,22 @@ ActiveRecord::Schema.define(version: 2020_02_22_175938) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "idx_order_id"
     t.index ["order_no"], name: "idx_order_no"
+  end
+
+  create_table "order_update_records", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.string "order_no", null: false
+    t.integer "before_update_status_code", null: false
+    t.string "before_update_status", null: false
+    t.integer "after_update_status_code", null: false
+    t.string "after_update_status", null: false
+    t.integer "operator_id"
+    t.string "operator_name"
+    t.boolean "is_del", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "idx_record_order_id"
+    t.index ["order_no"], name: "idx_record_order_no"
   end
 
   create_table "orders", force: :cascade do |t|

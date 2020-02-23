@@ -7,6 +7,7 @@
     <p><%= "Order status: #{transform_order_status order.order_status}" %></p>
     <p><%= "Order Subtotal: $ #{order.order_subtotal}" %></p>
     <p><%= "Created at: #{order.created_at}" %></p>
+    <p><%= link_to get_update_order_link_text(order, @my_trucks), orders_update_path(order: order) %></p>
     <br>
   </div>
 <% end %>

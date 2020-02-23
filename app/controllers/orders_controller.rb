@@ -4,10 +4,28 @@ class OrdersController < ApplicationController
   def my
     # check login status
     user_id = current_user.id
-    @orders = Order.where("user_id = #{user_id}")
-    if @orders.nil?
-      @orders = []
+    @my_trucks = Foodtruck.where("user_id = #{user_id}")
+    if @my_trucks.nil?
+      @my_trucks = []
     end
+
+    @orders = []
+    # the orders that I placed
+    my_placed_order = Order.where("user_id = #{user_id}")
+    if !my_placed_order.nil? && !my_placed_order.empty?
+      @orders.concat(my_placed_order)
+    end
+
+    # the orders that placed to my truck
+    if !@my_trucks.nil? && !@my_trucks.empty?
+      @my_trucks.each do |truck|
+        my_truck_order = Order.where("truck_id = #{truck.id}")
+        if !my_truck_order.nil? && !my_truck_order.empty?
+          @orders.concat(my_truck_order)
+        end
+      end
+    end
+
     logger.info "Find #{@orders.length} orders"
   end
 
@@ -88,6 +106,11 @@ class OrdersController < ApplicationController
     logger.info "Create order #{order_no} completed!"
 
     redirect_to '/orders/my'
+  end
+
+  # update order status
+  def update_status
+
   end
 
 end
