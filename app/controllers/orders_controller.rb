@@ -5,6 +5,9 @@ class OrdersController < ApplicationController
     # check login status
     user_id = current_user.id
     @orders = Order.where("user_id = #{user_id}")
+    if @orders.nil?
+      @orders = []
+    end
     logger.info "Find #{@orders.length} orders"
   end
 

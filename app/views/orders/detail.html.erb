@@ -3,8 +3,8 @@
 
 <h3> Order Information: </h3>
 <div>
-  <p> Truck: TODO </p>
-  <p> Truck Logo Image: TODO </p>
+  <%= link_to "Truck: #{@order.truck_name}", "/foodtrucks/#{@order.truck_id}" %>
+  <p> Truck Logo Image: <%= @order.truck_img %></p>
   <p><%= "Order no: #{@order.order_no}" %></p>
   <p><%= "Order status: #{transform_order_status @order.order_status}" %></p>
   <p><%= "Order Subtotal: $ #{@order.order_subtotal}" %></p>
@@ -14,8 +14,8 @@
 <h3> Items: </h3>
 <% @items.each_with_index do |item, index| %>
   <div>
-    <p> Item Image: TODO </p>
     <p><%= "Item Number: #{index + 1}" %></p>
+    <p> Item Image: <%= item.img_url %> </p>
     <p><%= "Item Name: #{item.item_name}" %></p>
     <p><%= "Item Price: $ #{item.item_price}" %></p>
     <p><%= "Quantity: #{item.quantity}" %></p>
