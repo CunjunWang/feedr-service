@@ -1,3 +1,5 @@
+include OrdersHelper
+
 class UsersController < ApplicationController
 
   # skip_before_action :authorized, only: [:new, :create]
@@ -5,23 +7,7 @@ class UsersController < ApplicationController
     @user = current_user
     @foodtrucks = Foodtruck.where(user_id: current_user.id)
     user_id = current_user.id
-    @orders = []
-
-    # the orders that I placed
-    my_placed_order = Order.where("user_id = #{user_id}")
-    if !my_placed_order.nil? && !my_placed_order.empty?
-      @orders.concat(my_placed_order)
-    end
-
-    # the orders that placed to my truck
-    if !@foodtrucks.nil? && !@foodtrucks.empty?
-      @foodtrucks.each do |truck|
-        my_truck_order = Order.where("truck_id = #{truck.id}")
-        if !my_truck_order.nil? && !my_truck_order.empty?
-          @orders.concat(my_truck_order)
-        end
-      end
-    end
+    @orders = get_all_my_orders(@foodtrucks, user_id)
   end
 
   def new
