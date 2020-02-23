@@ -1,3 +1,5 @@
+include OrdersHelper
+
 class OrdersController < ApplicationController
 
   # My order
@@ -67,7 +69,7 @@ class OrdersController < ApplicationController
     @order_subtotal = params[:subtotal].to_f
 
     # generate order no
-    order_no = OrdersHelper.generate_order_no
+    order_no = generate_order_no
     logger.info "New order no generated: #{order_no}"
 
     # transactional place the order
@@ -110,7 +112,49 @@ class OrdersController < ApplicationController
 
   # update order status
   def update_status
+    order_no = params['order_no']
+    current_status = params['status'].to_i
 
+    need_notify, next_status = get_next_status current_status
+
+    logger.info "order_no: #{order_no}"
+    logger.info "current_status: #{current_status}"
+    logger.info "next_status: #{next_status}"
+
+    # check whether the order to update exists
+    origin_order = Order.find_by_order_no(order_no)
+    if origin_order.nil?
+      logger.error "Fail to update order [#{order_no}] status, order does not exist!"
+      raise Exception "Invalid order"
+    end
+
+    # transactional operation
+    ActiveRecord::Base.transaction do
+      # 1. Update the order status
+      origin_order.order_status = next_status
+      origin_order.updated_at = Time.new
+      origin_order.save
+
+      # 2. add a new update record
+      new_update_record = {}
+      new_update_record[:order_id] = origin_order.id
+      new_update_record[:order_no] = origin_order.order_no
+      new_update_record[:before_update_status_code] = current_status
+      new_update_record[:before_update_status] = transform_order_status current_status
+      new_update_record[:after_update_status_code] = next_status
+      new_update_record[:after_update_status] = transform_order_status next_status
+      new_update_record[:operator_id] = current_user.id
+      new_update_record[:operator_name] = "#{current_user.first_name} #{current_user.last_name}"
+      OrderUpdateRecord.create(new_update_record)
+    end
+
+    # TODO: Notify the user by SMS
+    if need_notify
+
+    end
+
+    # reload the page
+    redirect_to '/orders/my'
   end
 
 end

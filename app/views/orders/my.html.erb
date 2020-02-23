@@ -4,10 +4,12 @@
   <div>
     <p><%= "Truck: #{order.truck_id}" %></p>
     <%= link_to "Order no: #{order.order_no}", "/orders/detail/#{order.order_no}" %>
-    <p><%= "Order status: #{transform_order_status order.order_status}" %></p>
+    <p><%= "Order Status: #{transform_order_status order.order_status}" %></p>
     <p><%= "Order Subtotal: $ #{order.order_subtotal}" %></p>
     <p><%= "Created at: #{order.created_at}" %></p>
-    <p><%= link_to get_update_order_link_text(order, @my_trucks), orders_update_path(order: order) %></p>
+    <p><%= link_to get_update_order_link_text(order, @my_trucks),
+                   orders_update_path(:order_no => order.order_no, :status => order.order_status),
+                   :method => :post %></p>
     <br>
   </div>
 <% end %>

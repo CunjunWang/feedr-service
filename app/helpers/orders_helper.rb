@@ -21,7 +21,7 @@ module OrdersHelper
     res
   end
 
-  def self.generate_order_no
+  def generate_order_no
     order_no = SecureRandom.uuid
     order_no.gsub('-', '')
   end
@@ -50,12 +50,30 @@ module OrdersHelper
     end
 
     # check if the order is placed by me
-    order_user_id = order.user_id
+    order_user_id = order.user_id.to_i
+    logger.info "user_id class: #{user_id.class}"
+    logger.info "order_user_id class: #{order_user_id.class}"
+    logger.info "order_status class: #{order_status.class}"
+    logger.info "user_id: #{user_id}, order_user_id: #{order_user_id}, order_status: #{order_status}"
     if user_id == order_user_id && order_status == 3
       return 'COMPLETE this order'
     end
 
     ''
+  end
+
+  def get_next_status(current_status)
+    need_notify = false
+    if current_status == 2
+      next_status = 3
+      need_notify = true
+    elsif current_status == 3
+      next_status = 4
+    else
+      next_status = 5
+    end
+
+    [need_notify, next_status]
   end
 
 end
