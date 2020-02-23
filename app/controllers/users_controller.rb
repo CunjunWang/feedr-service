@@ -6,6 +6,9 @@ class UsersController < ApplicationController
     @foodtrucks = Foodtruck.where(user_id: current_user.id)
     user_id = current_user.id
     @orders = Order.where("user_id = #{user_id}")
+    if @orders.nil?
+      @orders = []
+    end
   end
 
   def new
