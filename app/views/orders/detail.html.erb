@@ -1,4 +1,5 @@
 <title>Order Detail</title>
+<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
 <h2><%= "Detail for #{@order.order_no}" %></h2>
 
 <h3> Order Information: </h3>

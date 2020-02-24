@@ -21,5 +21,6 @@ Rails.application.routes.draw do
       get 'remove', to: 'menuitems#remove'
     end
   end
+  resources :menuitems
 
 end

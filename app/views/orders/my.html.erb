@@ -1,4 +1,5 @@
 <title>My Orders</title>
+<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
 <h1>My Orders</h1>
 <% @orders.each do |order| %>
   <div>

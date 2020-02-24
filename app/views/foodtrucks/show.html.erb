@@ -1,4 +1,4 @@
-<%= link_to "Back", request.referer.present? ? request.referer : default_path, class: "btn btn-link" %>
+<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
 <p>
   <strong>Name:</strong>
   <%= @foodtruck.Name %>
@@ -22,7 +22,7 @@
 <h2>Menu</h2>
 <%= render @foodtruck.menuitems %>
 
-<p>
-<%= link_to 'Checkout', '/orders/checkout', method: :get %>
-</p>
+<% if current_user.id != @foodtruck.user_id %>
+  <%= link_to 'Checkout', '/orders/checkout', method: :get %>
+<% end %>
 

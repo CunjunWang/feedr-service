@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  # skip_before_action :authorized, only: [:new, :create, :welcome]
+  skip_before_action :authorized, only: [:new, :create, :welcome]
   def new
     return redirect_to '/welcome' if logged_in?
     @user = User.new
