@@ -21,9 +21,10 @@ class MenuitemsController < ApplicationController
   end
 
   def update
-    @foodtruck = Foodtruck.find(params[:foodtruck_id])
-    @menuitem = @foodtruck.menuitems.find(params[:id])
+    # @menuitem = @foodtruck.menuitems.find(params[:id])
+    @menuitem = Menuitem.find(params[:id])
     @menuitem.update(menuitem_params)
+    redirect_to Foodtruck.find(@menuitem.foodtruck_id)
   end
 
   def add
