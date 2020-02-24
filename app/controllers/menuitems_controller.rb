@@ -1,5 +1,6 @@
 class MenuitemsController < ApplicationController
-  before_action :is_my_truck
+  before_action :not_my_truck, except: [:add, :remove]
+  before_action :is_my_truck, only: [:add, :remove]
   def edit
     @foodtruck = Foodtruck.find(params[:foodtruck_id])
     @menuitem = @foodtruck.menuitems.find(params[:id])
@@ -85,8 +86,14 @@ class MenuitemsController < ApplicationController
     params.require(:menuitem).permit(:Name, :Description, :price)
   end
 
-  def is_my_truck
+  def not_my_truck
     if !logged_in? || Foodtruck.find_by(params[:foodtruck_id]).user_id != current_user.id
+      redirect_to '/'
+    end
+  end
+
+  def is_my_truck
+    if logged_in? && Foodtruck.find_by(params[:foodtruck_id]).user_id == current_user.id
       redirect_to '/'
     end
   end
