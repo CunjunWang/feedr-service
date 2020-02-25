@@ -1,49 +1,53 @@
-<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
-<h1>Edit Foodtruck</h1>
-<%= form_with(model: @foodtruck, local: true) do |form| %>
+<%= link_to "Back", current_user, class: "btn btn-link" %>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Edit Foodtruck</h1>
+    <%= form_with(model: @foodtruck, local: true) do |form| %>
 
-    <% if @foodtruck.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@foodtruck.errors.count, "error") %> prohibited
-          this foodtruck from being saved:
-        </h2>
-        <ul>
-          <% @foodtruck.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <p>
-      <%= form.label :Name %><br>
-      <%= form.text_field :Name %>
-    </p>
+      <% if @foodtruck.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@foodtruck.errors.count, "error") %> prohibited
+            this foodtruck from being saved:
+          </h2>
+          <ul>
+            <% @foodtruck.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <p>
+        <%= form.label :Name %><br>
+        <%= form.text_field :Name %>
+      </p>
 
-    <p>
+      <p>
         <%= form.label :Type %><br>
-        <%= form.select :Type, ['American', 'Chinese']%>
-    </p>
+        <%= form.select :Type, ['American', 'Chinese'] %>
+      </p>
 
-    <p>
-      <%= form.label :Address%><br>
-      <%= form.text_area :Address %>
-    </p>
-   
-    <p>
-      <%= form.label :Description %><br>
-      <%= form.text_area :Description %>
-    </p>
+      <p>
+        <%= form.label :Address %><br>
+        <%= form.text_area :Address %>
+      </p>
 
-    <p>
-      <%= form.label :Owner %><br>
-      <%= form.text_field :Owner %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-  <% end %>
+      <p>
+        <%= form.label :Description %><br>
+        <%= form.text_area :Description %>
+      </p>
 
-  <h2>Add an item:</h2>
-  <%= render 'menuitems/form' %>
-   
+      <p>
+        <%= form.label :Owner %><br>
+        <%= form.text_field :Owner %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <h2>Add an item:</h2>
+    <%= render 'menuitems/form' %>
+  </div>
+</div>
