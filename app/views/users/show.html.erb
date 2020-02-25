@@ -45,6 +45,7 @@
           <td><%= link_to 'Destroy', foodtruck_path(foodtruck),
                           method: :delete,
                           data: {confirm: 'Are you sure?'} %></td>
+          <td><%= link_to "#{foodtruck.is_open ? 'Close' : 'Open'}", "/foodtrucks/#{foodtruck.id}/toggle", class: 'btn btn-primary' %></td>
         </tr>
       <% end %>
     <% else %>

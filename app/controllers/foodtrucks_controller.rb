@@ -18,7 +18,7 @@ class FoodtrucksController < ApplicationController
     session[:foodtruck][:truck_id] = @foodtruck.id
     session[:foodtruck][:truck_name] = @foodtruck.Name
     if session[:item].nil? || session[:item].empty?
-      session[:items] = []
+      session[:items] = Hash.new
     end
     session[:foodtruck][:truck_img] = ""
   end
@@ -26,7 +26,6 @@ class FoodtrucksController < ApplicationController
 
   def create
     @foodtruck = Foodtruck.new(params.require(:foodtruck).permit(:Name, :Type, :Address, :Description, :Owner, :user_id))
-
     if @foodtruck.save
       redirect_to current_user
     else
@@ -50,4 +49,10 @@ class FoodtrucksController < ApplicationController
     redirect_to user_path
   end
 
+  def toggle
+    @foodtruck = Foodtruck.find(params[:foodtruck_id])
+    @foodtruck.is_open = !@foodtruck.is_open
+    @foodtruck.save
+    redirect_to '/users/show'
+  end
 end

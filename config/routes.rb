@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'remove', to: 'menuitems#remove'
     end
   end
+  get '/foodtrucks/:foodtruck_id/toggle', to: 'foodtrucks#toggle'
   resources :menuitems
 
 end

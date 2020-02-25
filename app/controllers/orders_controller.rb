@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
     logger.info 'Run here in checkout'
     @truck_info = session[:foodtruck]
     # logger.info "@truck_info: #{@truck_info}"
-    @item_list = session[:items]
+    @item_list = session[:items].values
     # logger.info "session items: #{session["items"]}"
     @order_subtotal = 0
   end

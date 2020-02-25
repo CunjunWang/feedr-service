@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 2020_02_23_021217) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_open", default: false
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
   create_table "menuitems", force: :cascade do |t|

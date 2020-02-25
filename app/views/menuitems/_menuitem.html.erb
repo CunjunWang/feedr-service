@@ -1,6 +1,8 @@
 <p>
   <strong>Name:</strong>
   <%= menuitem.Name %>
+  <strong>Quantity:</strong>
+  <%= !session[:items].nil? && !session[:items][menuitem.id.to_s].nil? ? session[:items][menuitem.id.to_s]["quantity"] : 0 %>
 </p>
  
 <p>
@@ -13,9 +15,16 @@
   <%= menuitem.price %>
 </p>
 
+<% if @foodtruck.user_id == current_user.id %>
 <p>
   <%= link_to 'Edit', edit_foodtruck_menuitem_path(menuitem.foodtruck, menuitem) %>
 </p>
+  <p>
+    <%= link_to 'Destroy Menuitem', [menuitem.foodtruck, menuitem],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  </p>
+  <%else %>
 
 <p>
   <%= link_to 'Add to Order', foodtruck_menuitem_add_path(menuitem.foodtruck, menuitem) %>
@@ -25,8 +34,4 @@
   <%= link_to 'Remove from Order', foodtruck_menuitem_remove_path(menuitem.foodtruck, menuitem) %>
 </p>
 
-<p>
-  <%= link_to 'Destroy Menuitem', [menuitem.foodtruck, menuitem],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-</p>
+<%end %>
