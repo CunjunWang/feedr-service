@@ -1,4 +1,4 @@
-<%= link_to "Back", current_user, class: "btn btn-link" %>
+<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
 <p>
   <strong>Name:</strong>
   <%= @foodtruck.Name %>
