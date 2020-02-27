@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :authorized, only: [:new, :create, :welcome]
+
   def new
     return redirect_to '/welcome' if logged_in?
     @user = User.new
@@ -25,11 +26,11 @@ class SessionsController < ApplicationController
                   else
                     Foodtruck.where('user_id != ?', current_user.id)
                   end
-    @foodtrucks = @foodtrucks.where("Name like ?", "%#{params[:Name]}%") if params[:Name]
-    @foodtrucks = @foodtrucks.where("Type = ?", "#{params[:Type]}") if params[:Type] and params[:Type] != 'Select'
-    @foodtrucks = @foodtrucks.where("Address like ?", "%#{params[:Address]}%") if params[:Address]
-    @foodtrucks = @foodtrucks.where("Description like ?", "%#{params[:Description]}%") if params[:Description]
-    @foodtrucks = @foodtrucks.where("Owner like ?", "%#{params[:Owner]}%") if params[:Owner]
+    @foodtrucks = @foodtrucks.where("'Name' like ?", "%#{params['Name']}%") if params['Name']
+    @foodtrucks = @foodtrucks.where("'Type' = ?", "#{params['Type']}") if params['Type'] and params['Type'] != 'Select'
+    @foodtrucks = @foodtrucks.where("'Address' like ?", "%#{params['Address']}%") if params['Address']
+    @foodtrucks = @foodtrucks.where("'Description' like ?", "%#{params['Description']}%") if params['Description']
+    @foodtrucks = @foodtrucks.where("'Owner' like ?", "%#{params['Owner']}%") if params['Owner']
     @query = params.nil? ? {Name: '', Type: 'Select', Address: '', Description: '', Owner: ''} : params
   end
 

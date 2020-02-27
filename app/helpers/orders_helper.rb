@@ -5,7 +5,7 @@ module OrdersHelper
   def get_all_my_orders(my_trucks, user_id)
     my_orders = []
     # the orders that I placed
-    my_placed_order = Order.where("user_id = #{user_id}")
+    my_placed_order = Order.where("user_id = '#{user_id}'")
     if !my_placed_order.nil? && !my_placed_order.empty?
       my_orders.concat(my_placed_order)
     end
@@ -13,7 +13,7 @@ module OrdersHelper
     # the orders that placed to my truck
     if !my_trucks.nil? && !my_trucks.empty?
       my_trucks.each do |truck|
-        my_truck_order = Order.where("truck_id = #{truck.id}")
+        my_truck_order = Order.where("truck_id = '#{truck.id}'")
         if !my_truck_order.nil? && !my_truck_order.empty?
           my_orders.concat(my_truck_order)
         end
