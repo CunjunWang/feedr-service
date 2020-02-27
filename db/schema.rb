@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_23_021217) do
+ActiveRecord::Schema.define(version: 2020_02_27_154705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_02_23_021217) do
     t.string "Name"
     t.text "Description"
     t.decimal "price"
-    t.integer "foodtruck_id", null: false
+    t.bigint "foodtruck_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["foodtruck_id"], name: "index_menuitems_on_foodtruck_id"
@@ -73,14 +73,14 @@ ActiveRecord::Schema.define(version: 2020_02_23_021217) do
   create_table "orders", force: :cascade do |t|
     t.string "order_no", null: false
     t.string "truck_id", null: false
+    t.string "truck_name", default: "", null: false
+    t.string "truck_img"
     t.string "user_id", null: false
     t.integer "order_status", default: 2, null: false
     t.decimal "order_subtotal", precision: 6, scale: 2, null: false
     t.boolean "is_del", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "truck_name", default: "", null: false
-    t.string "truck_img"
     t.index ["order_no"], name: "unique_idx_order_no", unique: true
     t.index ["truck_id"], name: "idx_truck_id"
     t.index ["user_id"], name: "idx_user_id"
