@@ -49,15 +49,11 @@ group :test do
   gem 'webdrivers'
 
   gem 'cucumber-rails', require: false
-  # database_cleaner is not required, but highly recommended
+  # database_cleaner is not mandatory, but highly recommended
   gem 'database_cleaner'
+
+  gem 'rack_session_access'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-group :test do
-  gem 'cucumber-rails', require: false
-  # database_cleaner is not mandatory, but highly recommended
-  gem 'database_cleaner'
-end

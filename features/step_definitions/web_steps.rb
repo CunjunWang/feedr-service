@@ -21,8 +21,8 @@
 
 require 'uri'
 require 'cgi'
-# require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
-# require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 
 module WithinHelpers
   def with_scope(locator)
@@ -41,12 +41,14 @@ When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
   with_scope(parent) { When "#{step}:", table_or_string }
 end
 
-Given /^(?:|I )am on the food truck (.+) page$/ do |truck_id|
-  visit "/foodtrucks/#{truck_id}"
+Given /^(?:|I )am on the home page/ do
+  visit '/welcome'
+  puts page.body
 end
 
-Given /^(?:|I )am on (.+)$/ do |page_name|
-  visit page_name
+Given /^(?:|I )am on the food truck (.+) page$/ do |truck_id|
+  puts "truck id: #{truck_id}"
+  visit "/foodtrucks/#{truck_id}"
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
@@ -58,6 +60,8 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
+  # puts page.body
+  puts "link: #{link}"
   click_link(link)
 end
 
