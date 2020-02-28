@@ -18,6 +18,19 @@ end
 Given(/^There are following users$/) do |user_table|
   # table is a table.hashes.keys # => [:email, :password, :first_name, :last_name, :phone]
   user_table.hashes.each_with_index do |user, index|
-    User.new(user).save
+    @user = User.new(user)
+    @user.save
   end
+end
+
+When(/^I am on users\/new$/) do
+  visit '/users/new'
+end
+
+When(/^I am on login$/) do
+  visit '/login'
+end
+
+When(/^I am on homepage$/) do
+  visit '/'
 end
