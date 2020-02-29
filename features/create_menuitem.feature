@@ -1,10 +1,10 @@
-Feature: edit truck
+Feature: create menuitem
 
     As a foodtruck owner
-    I want to edit information of my foodtruck
-    So that I can give customers update of my truck
+    I want to create menuitems
+    So that I can run my own business
 
-Scenario: show content of a created foodtruck
+Scenario: create menuitem
 
     Given there is an existing user with email "mickey@monkees.com" and password "password"
     When I am on login
@@ -20,10 +20,11 @@ Scenario: show content of a created foodtruck
     And I fill in "Owner" with "testOwner1"
     And I press "Save Foodtruck"
     When I follow "Edit"
-    And I fill in "foodtruck[Name]" with "testTrucknew"
-    And I fill in "foodtruck[Description]" with "testDescriptionnew"
-    And I fill in "foodtruck[Address]" with "testAddressnew"
-    And I fill in "foodtruck[Owner]" with "testOwnernew"
-    When I press "Update Foodtruck"
-    Then I should see "testTrucknew"
-    And I should see "testAddressnew"
+    And I fill in "menuitem[Name]" with "testitemname1"
+    And I fill in "menuitem[Description]" with "testitemdescription1"
+    And I fill in "menuitem[price]" with "9.0"
+    And I press "Create Menuitem"
+    Then I should see "testitemname1"
+    And I should see "testitemdescription1"
+    And I should see "9.0"
+
