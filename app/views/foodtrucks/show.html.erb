@@ -23,6 +23,6 @@
 <%= render @foodtruck.menuitems %>
 
 <% if current_user.id != @foodtruck.user_id %>
-  <%= link_to 'Checkout', '/orders/checkout', method: :get %>
+  <%= link_to 'Checkout', '/orders/checkout', method: :get, id: 'checkout' %>
 <% end %>
 

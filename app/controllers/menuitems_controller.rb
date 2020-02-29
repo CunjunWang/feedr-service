@@ -29,8 +29,20 @@ class MenuitemsController < ApplicationController
 
   def add
     found = 0
-    @foodtruck = Foodtruck.find_by(params[:foodtruck_id])
-    @menuitem = @foodtruck.menuitems.find(params[:menuitem_id])
+
+    foodtruck = Foodtruck.where("id = #{params['foodtruck_id']}")
+    if foodtruck.nil? || foodtruck.empty?
+      logger.warn "No food truck found"
+      return
+    end
+    @foodtruck = foodtruck[0]
+
+    menuitem = Menuitem.where("id = #{params['menuitem_id']}")
+    if menuitem.nil? || menuitem.empty?
+      logger.warn "No menu item found"
+      return
+    end
+    @menuitem = menuitem[0]
 
     logger.info "menu item id: #{@menuitem[:id]}"
     logger.info "In add: session items = #{session[:items]}"

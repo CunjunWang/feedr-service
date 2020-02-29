@@ -3,6 +3,8 @@ class CreateOrders < ActiveRecord::Migration[6.0]
     create_table :orders do |t|
       t.string :order_no, null: false
       t.string :truck_id, null: false
+      t.string :truck_name, default: '', null: false
+      t.string :truck_img
       t.string :user_id, null: false
       t.integer :order_status, default: 2, null: false
       t.decimal :order_subtotal, precision: 6, scale: 2, null: false
