@@ -41,5 +41,3 @@ Feature: Search
     And I press "Search"
     Then I should see "Luoyang Uncle"
     And I should not see "Hamburger King"
-
-
