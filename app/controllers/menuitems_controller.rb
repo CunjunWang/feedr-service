@@ -84,7 +84,7 @@ class MenuitemsController < ApplicationController
   end
 
   def remove
-    @foodtruck = Foodtruck.find_by(params[:foodtruck_id])
+    @foodtruck = Foodtruck.find(params[:foodtruck_id])
     @menuitem = @foodtruck.menuitems.find(params[:menuitem_id])
 
     # logger.info "In remove: session items = #{session[:items]}"
