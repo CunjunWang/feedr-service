@@ -32,7 +32,7 @@ For the food truck you interested, click `Show`.
 
 You can do this without logging in the app.
 
-**The following operations require you to login first.**
+**_The following operations require you to login first._**
 
 **3. Create a Food Truck**
 
