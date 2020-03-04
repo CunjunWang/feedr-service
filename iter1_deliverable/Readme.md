@@ -3,7 +3,9 @@ COMS 4156 Term Project - Iteration 1
 
 ## Team Member:
 Cunjun Wang (cw3199)
+
 Jierui Liu (jl5490)
+
 Jiefan Li (jl5501)
 
 ## Iteration 1 Delivery:
