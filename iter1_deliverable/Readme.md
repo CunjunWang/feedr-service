@@ -30,9 +30,3 @@ You can run
 to see the test results. 
 
 For the detailed user story, see [User_Stories.md](./User_Stories.md)
-
-## Test Data
-You can follow the steps in User Stories, or you can directly use
-- `duckwcj@gmail.com / 123456`
-- `cw3199@columbia.edu / 123456` 
-to see the existing truck data and order data. 
