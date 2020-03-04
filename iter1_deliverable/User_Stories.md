@@ -4,6 +4,7 @@
 **1. Sign Up**
 
 Clink `Sign Up` on the homepage, fill the table, and then click `Sign up` button. 
+
 You will then be automatically logged in.
 
 **2. Login**
@@ -22,11 +23,13 @@ After you log in, click `Logout` on top right of home page.
 **1. Search Food Trucks**
 
 On home page, fill the filters and click `Search` button to filter the list of trucks.
+
 You can do this without logging in the app.
 
 **2. View Menu**
 
-For the food truck you interested, click `Show`
+For the food truck you interested, click `Show`.
+
 You can do this without logging in the app.
 
 **The following operations require you to login first.**
@@ -34,29 +37,36 @@ You can do this without logging in the app.
 **3. Create a Food Truck**
 
 Visit your profile page.
+
 In the `My Trucks` section, click `Create a Food Truck`.
+
 Fill the form, and click `Save Food Truck`.
 
 **4. View my Food Truck**
 
 Visit your profile page.
+
 In the `My Trucks` section, find your truck and click `Show`.
 
 **5. Edit my Food Truck && Add Menu Item**
 
 Visit your profile page.
+
 In the `My Trucks` section, find your truck and click `Edit`.
+
 - Fill the left form and click `Update Food Truck` to update food truck information.
 - Fill the right form and click `Create Menu Item` to add a menu item.
 
 **6. Toggle the Truck Open Status**
 
 Visit your profile page.
+
 In the `My Trucks` section, find your truck and click `Open` or `Close`.
 
 **7. Delete your Food Truck**
 
 Visit your profile page.
+
 In the `My Trucks` section, find your truck and click `Destroy`.
 
 ## Order Features
@@ -66,7 +76,9 @@ Pick a food truck on the homepage, click `Show`.
 
 Pick the food you want, click `Add to Order`, or click `Remove from Order` to delete from cart.
 
-Click `Checkout` Click `Place Order!`
+Click `Checkout`.
+
+Click `Place Order!`.
 
 **2. View my Orders**
 
