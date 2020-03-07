@@ -1,0 +1,33 @@
+<!-- Listing 1 -->
+<div class="col-md-6 col-lg-4 mb-4">
+  <div class="card listing-preview">
+    <img class="card-img-top" src="https://www.wtfwheresthefoodtruck.com/assets/web/images/banner.jpg" alt="">
+    <div class="card-img-overlay">
+      <h2>
+        <span class="badge badge-secondary text-white"><%= foodtruck.Type %></span>
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="listing-heading text-center">
+        <h4 class="text-primary"><%= foodtruck.Name %></h4>
+        <p>
+          <i class="fas fa-map-marker text-secondary"></i> <%= foodtruck.Address %>
+        </p>
+      </div>
+      <hr>
+      <!--            <div class="row py-2 text-secondary">-->
+      <!--                <div class="col-6">-->
+      <!--                    <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}</div>-->
+      <!--                <div class="col-6">-->
+      <!--                    <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div>-->
+      <!--            </div>-->
+      <!--            <div class="row py-2 text-secondary">-->
+      <!--                <div class="col-6">-->
+      <!--                    <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>-->
+      <!--                <div class="col-6">-->
+      <!--                    <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>-->
+      <!--            </div>-->
+      <%= link_to 'Show', foodtruck_path(foodtruck), class: "btn btn-primary btn-block" %>
+    </div>
+  </div>
+</div>

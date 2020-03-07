@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     end
 
 
-    if params['Type'] && params['Type'] != 'Select'
+    if params['Type'] && params['Type'] != 'Type (All)'
       @foodtrucks = @foodtrucks.where(Type: params['Type'])
     end
 
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
     if params['Owner'] && params['Owner'].strip != ''
       @foodtrucks = @foodtrucks.where("\"Owner\" like ?", "%#{params['Owner'].strip}%")
     end
-    @query = params.nil? ? {Name: '', Type: 'Select', Address: '', Description: '', Owner: ''} : params
+    @query = params.nil? ? {Name: '', Type: 'Type (All)', Address: '', Description: '', Owner: ''} : params
   end
 
   def logout

@@ -1,48 +1,71 @@
-<h1>Listing Foodtrucks</h1>
-<%= form_tag '/' do %>
-  <p>
-    <%= label_tag :Name %><br>
-    <%= text_field_tag :Name, @query[:Name] %>
-  </p>
+<section id="showcase">
+  <div class="container text-center">
+    <div class="home-search p-5">
+      <div class="overlay p-5">
+        <h1 class="display-4 mb-4">
+          Where's My Foodtruck?
+        </h1>
+        <p class="lead">We’ll help find the best foodtrucks around.</p>
+        <div class="search">
+          <%= form_tag '/' do %>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <%= text_field_tag :Name, @query[:Name], class: 'form-control', placeholder: 'Name' %>
+              </div>
 
-  <p>
-    <%= label_tag :Type %><br>
-    <%= select_tag :Type, options_for_select(['Select', 'American', 'Chinese'], :selected => @query[:Type])  %>
-  </p>
+              <div class="col-md-4 mb-3">
+                <%= select_tag :Type, options_for_select(['Type (All)', 'American', 'Chinese'], :selected => @query[:Type]), class: 'form-control' %>
+              </div>
 
-  <p>
-    <%= label_tag :Address %><br>
-    <%= text_area_tag :Address, @query[:Address] %>
-  </p>
+              <div class="col-md-4 mb-3">
+                <%= text_field_tag :Owner, @query[:Owner], class: 'form-control', placeholder: 'Owner' %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <%= text_area_tag :Address, @query[:Address], class: 'form-control', placeholder: 'Address' %>
+              </div>
+              <div class="col-md-6 mb-3">
+                <%= text_area_tag :Description, @query[:Description], class: 'form-control', placeholder: 'Description' %>
+              </div>
+            </div>
+            <p>
+              <%= submit_tag 'Search', class: "btn btn-secondary btn-block mt-4" %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<section id="listings" class="py-5">
+  <div class="container">
+    <div class="row">
+      <% @foodtrucks.each do |foodtruck| %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="https://www.wtfwheresthefoodtruck.com/assets/web/images/banner.jpg" alt="">
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white"><%= foodtruck.Type %></span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary"><%= foodtruck.Name %></h4>
+                <p>
+                  <%= foodtruck.Address %>
+                </p>
+              </div>
+              <hr>
+              <%= link_to 'Show', foodtruck_path(foodtruck), class: "btn btn-primary btn-block" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
 
-  <p>
-    <%= label_tag :Description %><br>
-    <%= text_area_tag :Description, @query[:Description] %>
-  </p>
 
-  <p>
-    <%= label_tag :Owner %><br>
-    <%= text_field_tag :Owner, @query[:Owner] %>
-  </p>
-
-  <p>
-    <%= submit_tag 'Search' %>
-  </p>
-  <% end %>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Address</th>
-    <th></th>
-  </tr>
-
-  <% @foodtrucks.each do |foodtruck| %>
-    <tr>
-      <td><%= foodtruck.Name %></td>
-      <td><%= foodtruck.Type %></td>
-      <td><%= foodtruck.Address %></td>
-      <td><%= link_to 'Show', foodtruck_path(foodtruck) %></td>
-    </tr>
-  <% end %>
-</table>

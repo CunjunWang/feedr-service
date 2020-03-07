@@ -88,7 +88,7 @@ class MenuitemsController < ApplicationController
     @menuitem = @foodtruck.menuitems.find(params[:menuitem_id])
 
     # logger.info "In remove: session items = #{session[:items]}"
-
+    6
     # session[:items].each do |item|
     #   if @menuitem[:Name].eql? item["item_name"]
     #     item["quantity"] -= 1
