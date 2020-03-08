@@ -12,11 +12,9 @@
               <div class="col-md-4 mb-3">
                 <%= text_field_tag :Name, @query[:Name], class: 'form-control', placeholder: 'Name' %>
               </div>
-
               <div class="col-md-4 mb-3">
                 <%= select_tag :Type, options_for_select(['Type (All)', 'American', 'Chinese'], :selected => @query[:Type]), class: 'form-control' %>
               </div>
-
               <div class="col-md-4 mb-3">
                 <%= text_field_tag :Owner, @query[:Owner], class: 'form-control', placeholder: 'Owner' %>
               </div>

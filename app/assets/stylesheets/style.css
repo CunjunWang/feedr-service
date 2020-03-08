@@ -19,9 +19,9 @@ img {
     margin-right: 0.4rem;
 }
 
-#register, #login {
-    background: url(../img/showcase.jpg) no-repeat top center fixed;
-}
+/*#register, #login {*/
+/*    background: url(../img/showcase.jpg) no-repeat top center fixed;*/
+/*}*/
 
 #showcase {
     background: url(../img/showcase.jpg) no-repeat top center fixed;
@@ -48,7 +48,7 @@ img {
 }
 
 #services {
-    background: url(../img/building.jpg) no-repeat top center fixed;
+    background: url(../img/showcase.jpg) no-repeat top center fixed;
     min-height: 300px;
     position: relative;
     overflow: hidden;
@@ -65,10 +65,10 @@ img {
 }
 
 #showcase-inner {
-    background: url(../img/building.jpg) no-repeat top center fixed;
     position: relative;
     overflow: hidden;
     min-height: 200px;
+    background: url(../img/showcase.jpg) no-repeat fixed top center;
 }
 
 #showcase-inner::before {

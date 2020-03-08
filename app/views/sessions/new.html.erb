@@ -1,16 +1,28 @@
-<div style="width: 30%; margin: auto">
-  <h1>Login</h1>
-  <%= form_tag '/login' do %>
-    <div class="form-group">
-      <%= label_tag :email %>
-      <%= text_field_tag :email, '', class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= label_tag :password %>
-      <%= password_field_tag :password, '', class: 'form-control' %>
-    </div>
-    <%= submit_tag "Login", class: "btn btn-default" %>
+<section id="login" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Login</h4>
+          </div>
+          <div class="card-body">
+            <%= form_tag '/login' do %>
+              <div class="form-group">
+                <%= label_tag :email %>
+                <%= text_field_tag :email, '', class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= label_tag :password %>
+                <%= password_field_tag :password, '', class: 'form-control' %>
+              </div>
+              <%= submit_tag "Login", class: "btn btn-secondary btn-block" %>
 
-    <%= link_to 'Sign up', new_user_path, class: "btn btn-link" %>
-  <% end %>
-</div>
+              <%= link_to 'Sign up', new_user_path %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,34 +1,47 @@
-<div style="width: 30%; margin: auto">
-  <h1>Sign Up</h1>
-  <%= form_for @user do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <% @user.errors.full_messages.each do |msg| %>
-          <div class="alert alert-danger" role="alert"><%= msg %></div>
-        <% end %>
+<section id="login" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Sign Up</h4>
+          </div>
+          <div class="card-body">
+            <%= form_for @user do |f| %>
+              <% if @user.errors.any? %>
+                <div id="error_explanation">
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <div class="alert alert-danger" role="alert"><%= msg %></div>
+                  <% end %>
+                </div>
+              <% end %>
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :first_name %>
+                <%= f.text_field :first_name, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :last_name %>
+                <%= f.text_field :last_name, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :phone %>
+                <%= f.text_field :phone, class: 'form-control' %>
+              </div>
+              <%= f.submit 'Sign up', class: "btn btn-secondary btn-block" %>
+              <%= link_to 'Login', '/login', class: "btn btn-link" %>
+            <% end %>
+          </div>
+        </div>
       </div>
-    <% end %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
     </div>
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :phone %>
-      <%= f.text_field :phone, class: 'form-control' %>
-    </div>
-    <%= f.submit 'Sign up', class: "btn btn-default" %>
-    <%= link_to 'Login', '/login', class: "btn btn-link" %>
-  <% end %>
-</div>
+  </div>
+</section>
+

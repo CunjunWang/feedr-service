@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     @foodtrucks = Foodtruck.where(user_id: current_user.id)
     user_id = current_user.id
     @orders = get_all_my_orders(@foodtrucks, user_id)
+    @foodtrucks_ordered = []
+    @orders.each do |order|
+      @foodtrucks_ordered.push(Foodtruck.find(order.truck_id).Name) unless Foodtruck.find(order.truck_id).nil?
+    end
   end
 
   def new
