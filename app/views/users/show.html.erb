@@ -13,6 +13,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="card mb-3">
+          <img class="card-img-top" src="https://cc6998a1chatbot.s3.amazonaws.com/assets/seo-panda-icon.png" alt="">
           <div class="card-body">
             <div class="row">
               <div class="col-md-8">
@@ -63,10 +64,7 @@
         <% else %>
           You don't have any order, why not <%= link_to 'Search for a foodtruck', '/' %>?
         <% end %>
-      </div>
-      <div class="col-md-3">
-      </div>
-      <div class="col-md-9">
+
 
         <h3>
           My Trucks <%= link_to 'Create Foodtruck', '/foodtrucks/new', class: 'btn btn-secondary btn-sm' %>
@@ -79,23 +77,20 @@
               <th scope="col">Type</th>
               <th scope="col">Address</th>
               <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <% @foodtrucks.each do |foodtruck| %>
               <tr>
-                <td><%= foodtruck.Name %></td>
+                <td><%= "#{foodtruck.Name} (#{foodtruck.is_open ? 'Open' : 'Close'})" %></td>
                 <td><%= foodtruck.Type %></td>
                 <td><%= foodtruck.Address %></td>
-                <td><%= link_to 'Show', foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %></td>
-                <td><%= link_to 'Edit', edit_foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %></td>
-                <td><%= link_to "#{foodtruck.is_open ? 'Close' : 'Open'}", "/foodtrucks/#{foodtruck.id}/toggle", class: 'btn btn-primary btn-sm' %></td>
-                <td><%= link_to 'Destroy', foodtruck_path(foodtruck),
-                                method: :delete,
-                                data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm' %></td>
+                <td><%= link_to 'Show', foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %>
+                  <%= link_to 'Edit', edit_foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %>
+                  <%= link_to "#{foodtruck.is_open ? 'Close' : 'Open'}", "/foodtrucks/#{foodtruck.id}/toggle", data: {confirm: 'Are you sure?'}, class: 'btn btn-primary btn-sm' %>
+                  <%= link_to 'Destroy', foodtruck_path(foodtruck),
+                              method: :delete,
+                              data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm' %></td>
               </tr>
             <% end %>
             </tbody>
@@ -106,4 +101,5 @@
       </div>
     </div>
   </div>
+
 </section>

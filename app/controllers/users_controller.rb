@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   def show
     @user = current_user
-    @foodtrucks = Foodtruck.where(user_id: current_user.id)
+    @foodtrucks = Foodtruck.where(user_id: current_user.id).order(:created_at)
     user_id = current_user.id
     @orders = get_all_my_orders(@foodtrucks, user_id)
     @foodtrucks_ordered = []
