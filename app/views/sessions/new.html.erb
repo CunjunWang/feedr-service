@@ -8,6 +8,14 @@
           </div>
           <div class="card-body">
             <%= form_tag '/login' do %>
+              <% if @errors.any? %>
+                <div id="error_explanation">
+                  <% @errors.each do |msg| %>
+                    <div class="alert alert-danger" role="alert"><%= msg %></div>
+                  <% end %>
+                </div>
+              <% end %>
+
               <div class="form-group">
                 <%= label_tag :email %>
                 <%= text_field_tag :email, '', class: 'form-control' %>
@@ -17,7 +25,6 @@
                 <%= password_field_tag :password, '', class: 'form-control' %>
               </div>
               <%= submit_tag "Login", class: "btn btn-secondary btn-block" %>
-
               <%= link_to 'Sign up', new_user_path %>
             <% end %>
           </div>

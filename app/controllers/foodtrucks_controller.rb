@@ -4,7 +4,11 @@ class FoodtrucksController < ApplicationController
   end
 
   def index
-    @foodtrucks = Foodtruck.all
+    @foodtrucks = if !logged_in?
+                    Foodtruck.all
+                  else
+                    Foodtruck.where('user_id != ?', current_user.id)
+                  end
   end
 
   def edit

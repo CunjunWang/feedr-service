@@ -1,22 +1,40 @@
-<h1>Listing Foodtrucks</h1>
- <table>
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Address</th>
-    <th></th>
-  </tr>
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">Foodtrucks We Have</h1>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <% @foodtrucks.each do |foodtruck| %>
-    <tr>
-      <td><%= foodtruck.Name %></td>
-      <td><%= foodtruck.Type %></td>
-      <td><%= foodtruck.Address %></td>
-      <td><%= link_to 'Show', foodtruck_path(foodtruck) %></td>
-      <td><%= link_to 'Edit', edit_foodtruck_path(foodtruck) %></td>
-      <td><%= link_to 'Destroy', foodtruck_path(foodtruck),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+<section id="listings" class="py-5">
+  <div class="container">
+    <div class="row">
+      <% @foodtrucks.each do |foodtruck| %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="https://www.wtfwheresthefoodtruck.com/assets/web/images/banner.jpg" alt="#{foodtruck.Name}">
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white"><%= foodtruck.Type %></span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary"><%= foodtruck.Name %></h4>
+                <p>
+                  <%= foodtruck.Address %>
+                </p>
+              </div>
+              <hr>
+              <%= link_to 'Show', foodtruck_path(foodtruck), class: "btn btn-primary btn-block" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+

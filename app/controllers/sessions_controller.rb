@@ -4,19 +4,23 @@ class SessionsController < ApplicationController
   def new
     return redirect_to '/welcome' if logged_in?
     @user = User.new
+    @errors = []
   end
 
   def create # user login, create user session
     @user = User.find_by(email: params[:email])
+    @errors = []
     if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to '/welcome'
+      redirect_to @user
     else
+      @errors.push("Email and password don't match")
       render 'new'
     end
   end
 
   def login;
+    @errors = []
   end
 
   def welcome;

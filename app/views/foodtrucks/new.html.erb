@@ -1,48 +1,106 @@
-<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
-<%= form_with scope: :foodtruck, url: foodtrucks_path, local: true do |form| %>
+<!--<section id="showcase-inner" class="py-5 text-white">-->
+<!--  <div class="container">-->
+<!--    <div class="row text-center">-->
+<!--      <div class="col-md-12">-->
+<!--        <h1 class="display-4">Become a Foodtrucker</h1>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
 
-  <% if @foodtruck.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@foodtruck.errors.count, "error") %> prohibited
-        this foodtruck from being saved:
-      </h2>
-      <ul>
-        <% @foodtruck.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<section id="login" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Create a Foodtruck</h4>
+          </div>
+          <div class="card-body">
+            <%= form_with scope: :foodtruck, url: foodtrucks_path, local: true do |form| %>
+              <% if @foodtruck.errors.any? %>
+                <div id="error_explanation">
+                  <% @foodtruck.errors.full_messages.each do |msg| %>
+                    <div class="alert alert-danger" role="alert"><%= msg %></div>
+                  <% end %>
+                </div>
+              <% end %>
+              <%= form.hidden_field :user_id, value: current_user.id %>
+              <div class="form-group">
+                <%= form.label :Name %>
+                <%= form.text_field :Name, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= form.label :Type %><br>
+                <%= form.select :Type, ['American', 'Chinese'], class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= form.label :Address %>
+                <%= form.text_area :Address, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= form.label :Description %>
+                <%= form.text_area :Description, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= form.label :Owner %>
+                <%= form.text_field :Owner, class: 'form-control' %>
+              </div>
+              <%= form.submit 'Create', class: "btn btn-secondary btn-block" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-  <p>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-  </p>
-  <p>
-    <%= form.label :Name %><br>
-    <%= form.text_field :Name %>
-  </p>
+  </div>
+</section>
 
-  <p>
-    <%= form.label :Type %><br>
-    <%= form.select :Type, ['American', 'Chinese'] %>
-  </p>
 
-  <p>
-    <%= form.label :Address %><br>
-    <%= form.text_area :Address %>
-  </p>
 
-  <p>
-    <%= form.label :Description %><br>
-    <%= form.text_area :Description %>
-  </p>
+<%#= form_with scope: :foodtruck, url: foodtrucks_path, local: true do |form| %>
 
-  <p>
-    <%= form.label :Owner %><br>
-    <%= form.text_field :Owner %>
-  </p>
+  <%# if @foodtruck.errors.any? %>
+<!--    <div id="error_explanation">-->
+<!--      <h2>-->
+<!--        <%#= pluralize(@foodtruck.errors.count, "error") %> prohibited-->
+<!--        this foodtruck from being saved:-->
+<!--      </h2>-->
+<!--      <ul>-->
+        <%# @foodtruck.errors.full_messages.each do |msg| %>
+<!--          <li><%#= msg %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+<!--  <p>-->
+    <%#= form.hidden_field :user_id, value: current_user.id %>
+<!--  </p>-->
+<!--  <p>-->
+<!--    <%#= form.label :Name %>-->
+    <%#= form.text_field :Name %>
+<!--  </p>-->
 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<!--  <p>-->
+<!--    <%#= form.label :Type %>-->
+    <%#= form.select :Type, ['American', 'Chinese'] %>
+<!--  </p>-->
+
+<!--  <p>-->
+<!--    <%#= form.label :Address %>-->
+    <%#= form.text_area :Address %>
+<!--  </p>-->
+
+<!--  <p>-->
+<!--    <%#= form.label :Description %>-->
+    <%#= form.text_area :Description %>
+<!--  </p>-->
+
+<!--  <p>-->
+<!--    <%#= form.label :Owner %>-->
+    <%#= form.text_field :Owner %>
+<!--  </p>-->
+
+<!--  <p>-->
+    <%#= form.submit %>
+<!--  </p>-->
+<%# end %>
