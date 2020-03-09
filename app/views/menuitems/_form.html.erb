@@ -1,17 +1,53 @@
-<%= form_with(model: [@foodtruck, @foodtruck.menuitems.build], local: true) do |form| %>
-  <p>
-    <%= form.label :Name %><br>
-    <%= form.text_field :Name %>
-  </p>
-  <p>
-    <%= form.label :Description %><br>
-    <%= form.text_area :Description %>
-  </p>
-  <p>
-    <%= form.label :Price %><br>
-    <%= form.text_area :price %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<div class="card">
+  <div class="card-header bg-primary text-white">
+    <h4>Add an Item</h4>
+  </div>
+  <div class="card-body">
+    <%= form_with(model: [@foodtruck, @foodtruck.menuitems.build], local: true) do |form| %>
+      <% if @menuitem_errors.any? %>
+        <div id="error_explanation">
+          <% @menuitem_errors.each do |msg| %>
+            <div class="alert alert-danger" role="alert"><%= msg %></div>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= form.label :Name %>
+        <%= form.text_field :Name, class: 'form-control' %>
+      </div>
+
+
+      <div class="form-group">
+
+        <%= form.label :Description %>
+        <%= form.text_area :Description, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :price %>
+        <%= form.text_field :price, class: 'form-control' %>
+      </div>
+      <%= form.submit 'Save', class: "btn btn-secondary btn-block" %>
+      <%= link_to 'Back to Foodtruck', foodtruck_path(@foodtruck) %>
+    <% end %>
+  </div>
+</div>
+
+
+<%#= form_with(model: [@foodtruck, @foodtruck.menuitems.build], local: true) do |form| %>
+<!--  <p>-->
+<!--    <%#= form.label :Name %><br>-->
+    <%#= form.text_field :Name %>
+<!--  </p>-->
+<!--  <p>-->
+<!--    <%#= form.label :Description %><br>-->
+    <%#= form.text_area :Description %>
+<!--  </p>-->
+<!--  <p>-->
+<!--    <%#= form.label :Price %><br>-->
+    <%#= form.text_area :price %>
+<!--  </p>-->
+<!--  <p>-->
+    <%#= form.submit %>
+<!--  </p>-->
+<%# end %>

@@ -1,53 +1,56 @@
-<%= link_to "Back", current_user, class: "btn btn-link" %>
-<div class="row">
-  <div class="col-md-6">
-    <h1>Edit Foodtruck</h1>
-    <%= form_with(model: @foodtruck, local: true) do |form| %>
+<section id="login" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Edit Foodtruck</h4>
+          </div>
+          <div class="card-body">
+            <%= form_with(model: @foodtruck, local: true) do |form| %>
+              <% if @foodtruck.errors.any? %>
+                <div id="error_explanation">
+                    <% @foodtruck.errors.full_messages.each do |msg| %>
+                      <div class="alert alert-danger" role="alert"><%= msg %></div>
+                    <% end %>
+                </div>
+              <% end %>
+              <div class="form-group">
+                <%= form.label :Name %>
+                <%= form.text_field :Name, class: 'form-control' %>
+              </div>
 
-      <% if @foodtruck.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@foodtruck.errors.count, "error") %> prohibited
-            this foodtruck from being saved:
-          </h2>
-          <ul>
-            <% @foodtruck.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
+              <div class="form-group">
+                <%= form.label :Type %><br>
+                <%= form.select :Type, ['American', 'Chinese'], class: 'form-control' %>
+              </div>
+              <div class="form-group">
+
+                <%= form.label :Address %>
+                <%= form.text_area :Address, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+
+                <%= form.label :Description %>
+                <%= form.text_area :Description, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :Owner %>
+                <%= form.text_field :Owner, class: 'form-control' %>
+              </div>
+                <%= form.submit 'Save', class: "btn btn-secondary btn-block" %>
+
             <% end %>
-          </ul>
+            <%= link_to 'Back to Foodtruck', foodtruck_path(@foodtruck) %>
+          </div>
         </div>
-      <% end %>
-      <p>
-        <%= form.label :Name %><br>
-        <%= form.text_field :Name %>
-      </p>
+      </div>
 
-      <p>
-        <%= form.label :Type %><br>
-        <%= form.select :Type, ['American', 'Chinese'] %>
-      </p>
-
-      <p>
-        <%= form.label :Address %><br>
-        <%= form.text_area :Address %>
-      </p>
-
-      <p>
-        <%= form.label :Description %><br>
-        <%= form.text_area :Description %>
-      </p>
-
-      <p>
-        <%= form.label :Owner %><br>
-        <%= form.text_field :Owner %>
-      </p>
-      <p>
-        <%= form.submit %>
-      </p>
-    <% end %>
+      <div class="col-md-6">
+        <%= render 'menuitems/form' %>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h2>Add an item:</h2>
-    <%= render 'menuitems/form' %>
   </div>
-</div>
+</section>

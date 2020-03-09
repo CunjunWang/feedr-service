@@ -8,9 +8,25 @@ class MenuitemsController < ApplicationController
   end
 
   def create
+    @menuitem_errors = []
+    success = true
     @foodtruck = Foodtruck.find(params[:foodtruck_id])
-    @menuitem = @foodtruck.menuitems.create(menuitem_params)
-    redirect_to foodtruck_path(@foodtruck)
+    @menuitem = @foodtruck.menuitems.new(menuitem_params)
+
+    if @menuitem.Name.nil?
+      @menuitem_errors.push("Item name can't be blank.")
+      success = false
+    end
+    if @menuitem.price.nil?
+      @menuitem_errors.push("Item price can't be blank.")
+      success = false
+    end
+    if success
+      @menuitem.save
+      redirect_to foodtruck_path(@foodtruck)
+    else
+      redirect_to edit_foodtruck_path(@foodtruck)
+    end
   end
 
   def destroy

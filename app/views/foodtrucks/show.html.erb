@@ -17,7 +17,11 @@
         <h4 class="text-primary">Description</h4>
         <%= @foodtruck.Description %>
         <hr>
-        <h4 class="text-primary">Menu</h4>
+        <h4 class="text-primary">Menu
+          <% if @foodtruck.user_id == current_user.id %>
+            <%= link_to 'Edit Foodtruck/Add Item', edit_foodtruck_path(@foodtruck), class: 'btn btn-secondary btn-sm' %>
+          <% end %>
+        </h4>
         <% if @foodtruck.menuitems.any? %>
           <table class="table">
             <thead>
@@ -35,8 +39,15 @@
                 <td><%= item.Description %></td>
                 <td><%= item.price %></td>
                 <td>
-                  <%= link_to 'Add', foodtruck_menuitem_add_path(item.foodtruck, item), class: 'btn btn-secondary btn-sm' %>
-                  <%= link_to 'Remove', foodtruck_menuitem_remove_path(item.foodtruck, item), class: 'btn btn-danger btn-sm' %>
+                  <% if @foodtruck.user_id == current_user.id %>
+                    <%= link_to 'Edit', edit_foodtruck_menuitem_path(item.foodtruck, item), class: 'btn btn-secondary btn-sm' %>
+                    <%= link_to 'Delete', [item.foodtruck, item],
+                                method: :delete,
+                                data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm' %>
+                  <% else %>
+                    <%= link_to 'Add', foodtruck_menuitem_add_path(item.foodtruck, item), class: 'btn btn-secondary btn-sm' %>
+                    <%= link_to 'Remove', foodtruck_menuitem_remove_path(item.foodtruck, item), class: 'btn btn-danger btn-sm' %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

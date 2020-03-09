@@ -50,7 +50,7 @@
                 <td><%= foodtruck.Type %></td>
                 <td><%= foodtruck.Address %></td>
                 <td><%= link_to 'Show', foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %>
-                  <%= link_to 'Edit', edit_foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %>
+                  <%= link_to 'Edit/Add Item', edit_foodtruck_path(foodtruck), class: 'btn btn-secondary btn-sm' %>
                   <%= link_to "#{foodtruck.is_open ? 'Close' : 'Open'}", "/foodtrucks/#{foodtruck.id}/toggle", data: {confirm: 'Are you sure?'}, class: 'btn btn-primary btn-sm' %>
                   <%= link_to 'Destroy', foodtruck_path(foodtruck),
                               method: :delete,
