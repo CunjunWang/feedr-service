@@ -33,7 +33,7 @@
         <h3>
           My Orders <%= link_to "Show All Orders", '/orders/my', class: 'btn btn-secondary btn-sm' %>
         </h3>
-        <% if @foodtrucks.any? %>
+        <% if @orders.any? %>
           <table class="table">
             <thead>
             <tr>
