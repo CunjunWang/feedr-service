@@ -31,42 +31,6 @@
 
       <div class="col-md-9">
         <h3>
-          My Orders <%= link_to "Show All Orders", '/orders/my', class: 'btn btn-secondary btn-sm' %>
-        </h3>
-        <% if @orders.any? %>
-          <table class="table">
-            <thead>
-            <tr>
-              <th scope="col">Foodtruck</th>
-              <th scope="col">Time</th>
-              <th scope="col">Status</th>
-              <th scope="col">Total</th>
-              <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% (@orders.length > 2 ? @orders[0..1] : @orders).each_with_index do |order, index| %>
-              <tr>
-                <td>
-                  <%= @foodtrucks_ordered[index] %>
-                </td>
-                <td><%= order.created_at %></td>
-                <td>
-                  <%= transform_order_status order.order_status %>
-                </td>
-
-                <td><%= "$#{order.order_subtotal}" %></td>
-                <td><%= link_to 'Show', "/orders/detail/#{order.order_no}", class: 'btn btn-secondary btn-sm' %></td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-        <% else %>
-          You don't have any order, why not <%= link_to 'Search for a foodtruck', '/' %>?
-        <% end %>
-
-        <hr>
-        <h3>
           My Trucks <%= link_to 'Create Foodtruck', '/foodtrucks/new', class: 'btn btn-secondary btn-sm' %>
         </h3>
         <% if @foodtrucks.any? %>
@@ -98,6 +62,44 @@
         <% else %>
           You don't have any truck, why not <%= link_to 'Create one', '/foodtrucks/new' %>?
         <% end %>
+        <hr>
+
+        <h3>
+          My Orders <%= link_to "Show All Orders", '/orders/my', class: 'btn btn-secondary btn-sm' %>
+        </h3>
+        <% if @orders.any? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Foodtruck</th>
+              <th scope="col">Time</th>
+              <th scope="col">Status</th>
+              <th scope="col">Total</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% (@orders).each_with_index do |order, index| %>
+              <tr>
+                <td>
+                  <%= @foodtrucks_ordered[index] %>
+                </td>
+                <td><%= order.created_at %></td>
+                <td>
+                  <%= transform_order_status order.order_status %>
+                </td>
+
+                <td><%= "$#{order.order_subtotal}" %></td>
+                <td><%= link_to 'Show', "/orders/detail/#{order.order_no}", class: 'btn btn-secondary btn-sm' %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          You don't have any order, why not <%= link_to 'Search for a foodtruck', '/' %>?
+        <% end %>
+
+
       </div>
     </div>
   </div>
