@@ -1,28 +1,84 @@
-<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
-<p>
-  <strong>Name:</strong>
-  <%= @foodtruck.Name %>
-</p>
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4"><%= @foodtruck.Name %></h1>
+        <p class="lead"><%= @foodtruck.Type %> Cuisine</p>
+        <p class="lead"><%= @foodtruck.Address %></p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>
-  <strong>Type_of_Cusine:</strong>
-  <%= @foodtruck.Type %>
-</p>
+<section id="dashboard" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="text-primary">Description</h4>
+        <%= @foodtruck.Description %>
+        <hr>
+        <h4 class="text-primary">Menu</h4>
+        <% if @foodtruck.menuitems.any? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @foodtruck.menuitems.each do |item| %>
+              <tr>
+                <td><%= item.Name %></td>
+                <td><%= item.Description %></td>
+                <td><%= item.price %></td>
+                <td>
+                  <%= link_to 'Add', foodtruck_menuitem_add_path(item.foodtruck, item), class: 'btn btn-secondary btn-sm' %>
+                  <%= link_to 'Remove', foodtruck_menuitem_remove_path(item.foodtruck, item), class: 'btn btn-danger btn-sm' %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+          <% if current_user.id != @foodtruck.user_id %>
+            <%= link_to 'Checkout', '/orders/checkout', method: :get, id: 'checkout', class: 'btn btn-secondary btn-sm' %>
+          <% end %>
+        <% else %>
+          Sorry, this foodtruck doesn't have a menu yet.
+        <% end %>
 
-<p>
-  <strong>Address:</strong>
-  <%= @foodtruck.Address %>
-</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="text-primary">Address</h4>
+        <div id="map" style="height: 300px"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>
-  <strong>Description:</strong>
-  <%= @foodtruck.Description %>
-</p>
+<script>
+    var map;
+    var geocoder;
+    var address = "<%= @foodtruck.Address %>";
 
-<h2>Menu</h2>
-<%= render @foodtruck.menuitems %>
+    function initMap() {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function (results, status) {
+            if (status === 'OK') {
+                var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 15, center: results[0].geometry.location});
+                new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                console.error('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6kHpm24MjUXHqCxpNk7oIPBW40-Sp0Nc&callback=initMap" async defer></script>
 
-<% if current_user.id != @foodtruck.user_id %>
-  <%= link_to 'Checkout', '/orders/checkout', method: :get, id: 'checkout' %>
-<% end %>
 
