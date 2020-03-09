@@ -1,10 +1,10 @@
 Feature: edit truck
 
-    As a foodtruck owner
-    I want to edit information of my foodtruck
-    So that I can give customers update of my truck
+  As a foodtruck owner
+  I want to edit information of my foodtruck
+  So that I can give customers update of my truck
 
-Scenario: show content of a created foodtruck
+  Scenario: show content of a created foodtruck
 
     Given there is an existing user with email "mickey@monkees.com" and password "password"
     When I am on login

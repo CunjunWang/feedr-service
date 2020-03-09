@@ -1,17 +1,17 @@
-<%= form_with(model: [ @foodtruck, @foodtruck.menuitems.build ], local: true) do |form| %>
-    <p>
-      <%= form.label :Name %><br>
-      <%= form.text_field :Name %>
-    </p>
-    <p>
-      <%= form.label :Description %><br>
-      <%= form.text_area :Description %>
-    </p>
-    <p>
-      <%= form.label :Price %><br>
-      <%= form.text_area :price %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-  <% end %>
+<%= form_with(model: [@foodtruck, @foodtruck.menuitems.build], local: true) do |form| %>
+  <p>
+    <%= form.label :Name %><br>
+    <%= form.text_field :Name %>
+  </p>
+  <p>
+    <%= form.label :Description %><br>
+    <%= form.text_area :Description %>
+  </p>
+  <p>
+    <%= form.label :Price %><br>
+    <%= form.text_area :price %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

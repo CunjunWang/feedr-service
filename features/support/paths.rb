@@ -13,16 +13,18 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the (Feedr )?home\s?page$/ then '/'
-    when /^the food trucks page$/ then '/foodtrucks'
+    when /^the (Feedr )?home\s?page$/ then
+      '/'
+    when /^the food trucks page$/ then
+      '/foodtrucks'
 
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #   when /^(.*)'s profile page$/i
-    #     user_profile_path(User.find_by_login($1))
-    # when /food truck ^(.*) page$/i
-    #   foodtruck_path($1)
+      # Add more mappings here.
+      # Here is an example that pulls values out of the Regexp:
+      #
+      #   when /^(.*)'s profile page$/i
+      #     user_profile_path(User.find_by_login($1))
+      # when /food truck ^(.*) page$/i
+      #   foodtruck_path($1)
 
     else
       begin
@@ -31,7 +33,7 @@ module NavigationHelpers
         self.send(path_components.push('path').join('_').to_sym)
       rescue NoMethodError, ArgumentError
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-          "Now, go and add a mapping in #{__FILE__}"
+                  "Now, go and add a mapping in #{__FILE__}"
       end
     end
   end

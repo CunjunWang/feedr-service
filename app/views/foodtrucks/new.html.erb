@@ -59,48 +59,48 @@
 
 <%#= form_with scope: :foodtruck, url: foodtrucks_path, local: true do |form| %>
 
-  <%# if @foodtruck.errors.any? %>
+<%# if @foodtruck.errors.any? %>
 <!--    <div id="error_explanation">-->
 <!--      <h2>-->
 <!--        <%#= pluralize(@foodtruck.errors.count, "error") %> prohibited-->
 <!--        this foodtruck from being saved:-->
 <!--      </h2>-->
 <!--      <ul>-->
-        <%# @foodtruck.errors.full_messages.each do |msg| %>
+<%# @foodtruck.errors.full_messages.each do |msg| %>
 <!--          <li><%#= msg %></li>-->
-        <%# end %>
+<%# end %>
 <!--      </ul>-->
 <!--    </div>-->
-  <%# end %>
+<%# end %>
 <!--  <p>-->
-    <%#= form.hidden_field :user_id, value: current_user.id %>
+<%#= form.hidden_field :user_id, value: current_user.id %>
 <!--  </p>-->
 <!--  <p>-->
 <!--    <%#= form.label :Name %>-->
-    <%#= form.text_field :Name %>
+<%#= form.text_field :Name %>
 <!--  </p>-->
 
 <!--  <p>-->
 <!--    <%#= form.label :Type %>-->
-    <%#= form.select :Type, ['American', 'Chinese'] %>
+<%#= form.select :Type, ['American', 'Chinese'] %>
 <!--  </p>-->
 
 <!--  <p>-->
 <!--    <%#= form.label :Address %>-->
-    <%#= form.text_area :Address %>
+<%#= form.text_area :Address %>
 <!--  </p>-->
 
 <!--  <p>-->
 <!--    <%#= form.label :Description %>-->
-    <%#= form.text_area :Description %>
+<%#= form.text_area :Description %>
 <!--  </p>-->
 
 <!--  <p>-->
 <!--    <%#= form.label :Owner %>-->
-    <%#= form.text_field :Owner %>
+<%#= form.text_field :Owner %>
 <!--  </p>-->
 
 <!--  <p>-->
-    <%#= form.submit %>
+<%#= form.submit %>
 <!--  </p>-->
 <%# end %>

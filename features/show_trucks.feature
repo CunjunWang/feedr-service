@@ -1,10 +1,10 @@
 Feature: show created foodtruck
 
-    As a foodtruck owner
-    I want to see the content of my created foodtruck
-    So that I can see the content of my foodtruck
+  As a foodtruck owner
+  I want to see the content of my created foodtruck
+  So that I can see the content of my foodtruck
 
-Scenario: show content of a created foodtruck
+  Scenario: show content of a created foodtruck
 
     Given there is an existing user with email "mickey@monkees.com" and password "password"
     When I am on login

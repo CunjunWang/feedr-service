@@ -1,10 +1,10 @@
 Feature: create new foodtruck
 
-    As a user
-    I want to create my own foodtruck
-    So that I can use Feedr to better serve my customers
+  As a user
+  I want to create my own foodtruck
+  So that I can use Feedr to better serve my customers
 
-Scenario: create a new foodtruck
+  Scenario: create a new foodtruck
 
     Given there is an existing user with email "mickey@monkees.com" and password "password"
     When I am on login

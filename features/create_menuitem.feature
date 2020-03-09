@@ -1,10 +1,10 @@
 Feature: create menuitem
 
-    As a foodtruck owner
-    I want to create menuitems
-    So that I can run my own business
+  As a foodtruck owner
+  I want to create menuitems
+  So that I can run my own business
 
-Scenario: create menuitem
+  Scenario: create menuitem
 
     Given there is an existing user with email "mickey@monkees.com" and password "password"
     When I am on login
