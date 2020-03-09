@@ -42,7 +42,7 @@
             <% end %>
             </tbody>
           </table>
-          <% if current_user.id != @foodtruck.user_id %>
+          <% if current_user.id != @foodtruck.user_id && !session[:items].empty? %>
             <%= link_to 'Checkout', '/orders/checkout', method: :get, id: 'checkout', class: 'btn btn-secondary btn-sm' %>
           <% end %>
         <% else %>

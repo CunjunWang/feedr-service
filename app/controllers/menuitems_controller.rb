@@ -101,7 +101,8 @@ class MenuitemsController < ApplicationController
     if session[:items].key?(item_id)
       if session[:items][item_id]['quantity'] > 0
         session[:items][item_id]['quantity'] -= 1
-      elsif session[:items][item_id]['quantity'] == 0
+      end
+      if session[:items][item_id]['quantity'] == 0
         session[:items].delete(item_id)
       end
     end
