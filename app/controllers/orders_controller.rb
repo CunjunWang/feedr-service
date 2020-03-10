@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   def my
     # check login status
     user_id = current_user.id
+    @user = User.where("id = #{user_id}")[0]
     @my_trucks = Foodtruck.where("user_id = #{user_id}")
     if @my_trucks.nil?
       @my_trucks = []

@@ -1,16 +1,69 @@
-<title>My Orders</title>
-<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
-<h1>My Orders</h1>
-<% @orders.each do |order| %>
-  <div>
-    <p><%= "Truck: #{order.truck_id}" %></p>
-    <%= link_to "Order no: #{order.order_no}", "/orders/detail/#{order.order_no}" %>
-    <p><%= "Order Status: #{transform_order_status order.order_status}" %></p>
-    <p><%= "Order Subtotal: $ #{order.order_subtotal}" %></p>
-    <p><%= "Created at: #{order.created_at}" %></p>
-    <p><%= link_to get_update_order_link_text(order, @my_trucks),
-                   orders_update_path(:order_no => order.order_no, :status => order.order_status),
-                   :method => :post %></p>
-    <br>
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">Welcome, <%= @user.first_name %> <%= @user.last_name %></h1>
+      </div>
+    </div>
   </div>
-<% end %>
+</section>
+
+<title>My Orders</title>
+<%#= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
+
+<section id="dashboard" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img class="card-img-top" src="https://cc6998a1chatbot.s3.amazonaws.com/assets/seo-panda-icon.png" alt="">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <h5 class="text-secondary"><%= @user.first_name %> <%= @user.last_name %></h5>
+              </div>
+              <div class="col-md-4">
+                <%= link_to 'Edit', edit_user_path(@user), class: 'btn-secondary btn btn-sm' %>
+              </div>
+            </div>
+            <h6 class="card-text"><%= @user.email %></h6>
+            <h6 class="card-text"><%= @user.phone %></h6>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <h3>
+          My Orders
+        </h3>
+        <% if @orders.any? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Truck</th>
+              <th scope="col">Status</th>
+              <th scope="col">Subtotal</th>
+              <th scope="col">Create Time</th>
+              <th scope="col">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @orders.each do |order| %>
+              <tr>
+                <td><%= "[logo] #{order.truck_name}" %></td>
+                <td><%= "#{transform_order_status order.order_status}" %></td>
+                <td><%= "$ #{order.order_subtotal}" %></td>
+                <td><%= "#{order.created_at}" %></td>
+                <td><%= link_to 'Detail', "/orders/detail/#{order.order_no}", class: 'btn btn-secondary btn-sm' %>
+                  <%= link_to get_update_order_link_text(order, @my_trucks),
+                              orders_update_path(:order_no => order.order_no, :status => order.order_status),
+                              :method => :post %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
