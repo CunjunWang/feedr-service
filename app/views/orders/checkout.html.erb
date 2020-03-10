@@ -8,7 +8,6 @@
   </div>
 </section>
 
-
 <section id="checkout" class="py-4">
   <div class="container">
     <h3>Place Order to <%= @truck_info["truck_name"] %></h3>
@@ -44,7 +43,8 @@
 
     <div align="right">
       <h5><%= "Order Subtotal: $ #{@order_subtotal}" %></h5>
-      <%= link_to 'Place Order!', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal),
+      <%#= link_to 'Go Back Edit', "/foodtrucks/#{@truck_info['truck_id']}", class: 'btn btn-primary btn-sm' %>
+      <%= link_to 'Place Order', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal),
                   method: :post, class: 'btn btn-secondary btn-sm' %>
     </div>
   </div>

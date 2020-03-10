@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   def checkout
     logger.info 'Run here in checkout'
     @truck_info = session[:foodtruck]
-    # logger.info "@truck_info: #{@truck_info}"
+    logger.info "@truck_info: #{@truck_info}"
     item_obj = session[:items].values
     logger.info "session items: #{session["items"]}"
     item_list = []
