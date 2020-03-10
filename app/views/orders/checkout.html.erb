@@ -1,19 +1,51 @@
-<h2>Checkout Page</h2>
-
-<div>
-  <h3><%= "Truck: #{@truck_info["truck_name"]}" %></h3>
-  <h3>Items</h3>
-  <% @item_list.each_with_index do |item, index| %>
-    <div>
-      <h4><%= "Item #{index + 1}: #{item["item_name"]}" %></h4>
-      <p><%= "Price: $ #{item["item_price"]}" %></p>
-      <p><%= "Quantity: #{item["quantity"]}" %></p>
-      <p><%= "Item Subtotal: $ #{calculate_item_subtotal item["item_price"].to_f, item["quantity"].to_i}" %></p>
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">Checkout Order</h1>
+      </div>
     </div>
-  <% end %>
-</div>
+  </div>
+</section>
 
-<div>
-  <h3><%= "Order Subtotal: $ #{@order_subtotal}" %></h3>
-  <%= link_to 'Place Order!', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal), method: :post %>
-</div>
+
+<section id="checkout" class="py-4">
+  <div class="container">
+    <h3>Place Order to <%= @truck_info["truck_name"] %></h3>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <% if @item_list.any? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Item Number</th>
+              <th scope="col">Thumbnail</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @item_list.each_with_index do |item, index| %>
+              <tr>
+                <td><%= "#{index + 1}" %></td>
+                <td><%= item["item_img"] %></td>
+                <td><%= "#{item["item_name"]}" %></td>
+                <td><%= "$ #{item["item_price"]}" %></td>
+                <td><%= "#{item["quantity"]}" %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+
+    <div align="right">
+      <h5><%= "Order Subtotal: $ #{@order_subtotal}" %></h5>
+      <%= link_to 'Place Order!', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal),
+                  method: :post, class: 'btn btn-secondary btn-sm' %>
+    </div>
+  </div>
+</section>

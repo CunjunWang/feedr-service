@@ -41,9 +41,23 @@ class OrdersController < ApplicationController
     logger.info 'Run here in checkout'
     @truck_info = session[:foodtruck]
     # logger.info "@truck_info: #{@truck_info}"
-    @item_list = session[:items].values
-    # logger.info "session items: #{session["items"]}"
-    @order_subtotal = 0
+    item_obj = session[:items].values
+    logger.info "session items: #{session["items"]}"
+    item_list = []
+    item_obj.each do |item|
+      # logger.info "key: #{item}"
+      item_list.push(item)
+
+    end
+    @item_list = item_list
+    logger.info "item list #{@item_list}"
+
+    subtotal = 0
+    item_list.each do |item|
+      subtotal += item['quantity'].to_i * item['item_price'].to_f
+    end
+
+    @order_subtotal = subtotal
   end
 
   # Place order

@@ -69,7 +69,9 @@
     </div>
 
     <div class="row">
-      <h3>Order Status History</h3>
+      <% if @records.any? %>
+        <h3>Order Status History</h3>
+      <% end %>
       <div class="col-md-12">
         <% if @records.any? %>
           <table class="table">
