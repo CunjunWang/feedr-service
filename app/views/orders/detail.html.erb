@@ -1,24 +1,99 @@
-<title>Order Detail</title>
-<%= link_to "Back", request.referer.present? ? request.referer : '/', class: "btn btn-link" %>
-<h2><%= "Detail for #{@order.order_no}" %></h2>
-
-<h3> Order Information: </h3>
-<div>
-  <%= link_to "Truck: #{@order.truck_name}", "/foodtrucks/#{@order.truck_id}" %>
-  <p> Truck Logo Image: <%= @order.truck_img %></p>
-  <p><%= "Order no: #{@order.order_no}" %></p>
-  <p><%= "Order status: #{transform_order_status @order.order_status}" %></p>
-  <p><%= "Order Subtotal: $ #{@order.order_subtotal}" %></p>
-  <p><%= "Created at: #{@order.created_at}" %></p>
-</div>
-
-<h3> Items: </h3>
-<% @items.each_with_index do |item, index| %>
-  <div>
-    <p><%= "Item Number: #{index + 1}" %></p>
-    <p> Item Image: <%= item.img_url %> </p>
-    <p><%= "Item Name: #{item.item_name}" %></p>
-    <p><%= "Item Price: $ #{item.item_price}" %></p>
-    <p><%= "Quantity: #{item.quantity}" %></p>
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h3 class="display-4">Order Detail</h3>
+      </div>
+    </div>
   </div>
-<% end %>
+</section>
+
+<section id="order-detail" class="py-4">
+  <div class="container">
+    <div class="row">
+      <h3>Order Infomation</h3>
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Truck</th>
+            <th scope="col">Order No.</th>
+            <th scope="col">Status</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Create Time</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><%= link_to "#{@order.truck_name}", "/foodtrucks/#{@order.truck_id}" %></td>
+            <td><%= "#{@order.order_no}" %></td>
+            <td><%= "#{transform_order_status @order.order_status}" %></td>
+            <td><%= "$ #{@order.order_subtotal}" %></td>
+            <td><%= "#{@order.created_at}" %></td>
+          </tr>
+          </tbody>
+        </table>
+        <div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <% if @items.any? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Item Number</th>
+              <th scope="col">Thumbnail</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @items.each_with_index do |item, index| %>
+              <tr>
+                <td><%= "#{index + 1}" %></td>
+                <td><%= item.img_url %></td>
+                <td><%= "#{item.item_name}" %></td>
+                <td><%= "$ #{item.item_price}" %></td>
+                <td><%= "#{item.quantity}" %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3>Order Status History</h3>
+      <div class="col-md-12">
+        <% if @records.any? %>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Before</th>
+              <th scope="col">After</th>
+              <th scope="col">Operated By</th>
+              <th scope="col">Opration Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @records.each do |record| %>
+              <tr>
+                <td><%= record.before_update_status %></td>
+                <td><%= record.after_update_status %></td>
+                <td><%= record.operator_name %></td>
+                <td><%= record.created_at %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

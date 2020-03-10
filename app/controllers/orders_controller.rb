@@ -32,6 +32,8 @@ class OrdersController < ApplicationController
       logger.info "There is no item in order [#{order_no}]."
       raise Exception "Invalid order [#{order_no}]"
     end
+
+    @records = OrderUpdateRecord.where("order_no = '#{order_no}'").sort_by &:created_at
   end
 
   # Checkout
