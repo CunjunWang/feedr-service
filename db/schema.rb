@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_02_27_154705) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "foodtrucks", force: :cascade do |t|
     t.string "Name"
     t.string "Type"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_154705) do
     t.string "Name"
     t.text "Description"
     t.decimal "price"
-    t.integer "foodtruck_id", null: false
+    t.bigint "foodtruck_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["foodtruck_id"], name: "index_menuitems_on_foodtruck_id"

@@ -20,6 +20,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Semd sms message with twilio
+gem 'twilio-ruby'
+
 gem 'pg'
 
 gem 'geocoder'

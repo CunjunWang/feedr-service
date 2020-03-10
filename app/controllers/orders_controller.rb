@@ -1,6 +1,6 @@
-include OrdersHelper
-
 class OrdersController < ApplicationController
+  include OrdersHelper
+  include SmsHelper
 
   # My order
   def my
@@ -101,9 +101,7 @@ class OrdersController < ApplicationController
 
     need_notify, next_status = get_next_status current_status
 
-    logger.info "order_no: #{order_no}"
-    logger.info "current_status: #{current_status}"
-    logger.info "next_status: #{next_status}"
+    logger.info "order_no: #{order_no}, current_status: #{current_status}, next_status: #{next_status}"
 
     # check whether the order to update exists
     origin_order = Order.find_by_order_no(order_no)
@@ -132,9 +130,33 @@ class OrdersController < ApplicationController
       OrderUpdateRecord.create(new_update_record)
     end
 
-    # TODO: Notify the user by SMS
+    # Notify the user by SMS
     if need_notify
+      user_id = origin_order.user_id
+      user = User.where("id = #{user_id}")[0]
+      if user.nil?
+        logger.error "No user with user id #{user_id}"
+        raise Exception 'Fail to send message, no such user!'
+      end
 
+      truck_id = origin_order.truck_id
+      truck = Foodtruck.where("id = #{truck_id}")[0]
+      if truck.nil?
+        logger.error "No user truck user id #{user_id}"
+        raise Exception 'Fail to send message, no such food truck!'
+      end
+
+      # logger.info "Truck #{truck.as_json}"
+      # logger.info "User #{user.as_json}"
+
+      truck_name = truck.Name
+      address = truck.Address
+      username = user.first_name
+      status = transform_order_status next_status
+      message = build_message_body(username, truck_name, status, address)
+
+      user_mobile = user.phone
+      send_message(user_mobile, message)
     end
 
     # reload the page

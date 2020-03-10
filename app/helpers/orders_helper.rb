@@ -1,6 +1,5 @@
-require 'securerandom'
-
 module OrdersHelper
+  require 'securerandom'
 
   def get_all_my_orders(my_trucks, user_id)
     my_orders = []
