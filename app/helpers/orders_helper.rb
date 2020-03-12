@@ -56,15 +56,12 @@ module OrdersHelper
     if !my_trucks.nil? && !my_trucks.empty?
       my_trucks.each do |truck|
         truck_id = truck.id
-        logger.info "Truck id = #{truck_id}"
-        logger.info "Order Truck Id = #{order_truck_id}"
         if truck_id.to_i == order_truck_id.to_i
-          logger.info "Current order status = #{order_status}"
           if order_status == 2
-            return 'Notify the user order is READY!'
+            return 'Ready'
           end
           if order_status == 3
-            return 'COMPLETE this order'
+            return 'Complete'
           end
         end
       end
@@ -72,12 +69,8 @@ module OrdersHelper
 
     # check if the order is placed by me
     order_user_id = order.user_id.to_i
-    logger.info "user_id class: #{user_id.class}"
-    logger.info "order_user_id class: #{order_user_id.class}"
-    logger.info "order_status class: #{order_status.class}"
-    logger.info "user_id: #{user_id}, order_user_id: #{order_user_id}, order_status: #{order_status}"
     if user_id == order_user_id && order_status == 3
-      return 'COMPLETE this order'
+      return 'Complete'
     end
 
     ''
