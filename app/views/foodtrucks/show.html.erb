@@ -53,8 +53,8 @@
             <% end %>
             </tbody>
           </table>
-          <% if current_user.id != @foodtruck.user_id && !session[:items].empty? %>
-            <%= link_to 'Checkout', '/orders/checkout', method: :get, id: 'checkout', class: 'btn btn-secondary btn-sm' %>
+          <% if current_user.id != @foodtruck.user_id && !@cart.empty? %>
+            <%= link_to 'Checkout', "/orders/checkout?truck=#{@foodtruck.id}", method: :get, id: 'checkout', class: 'btn btn-secondary btn-sm' %>
           <% end %>
         <% else %>
           Sorry, this foodtruck doesn't have a menu yet.

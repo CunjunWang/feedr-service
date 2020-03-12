@@ -18,7 +18,13 @@ class FoodtrucksController < ApplicationController
 
 
   def show
-    @foodtruck = Foodtruck.find(params[:id])
+    id = params[:id]
+    @foodtruck = Foodtruck.find(id)
+
+    key = "#{current_user.id}_#{id}"
+    cart = $redis.get key
+    @cart = ((cart.nil? || cart == '') ? {} : eval(cart))
+
     session[:foodtruck] = {}
     session[:foodtruck][:truck_id] = @foodtruck.id
     session[:foodtruck][:truck_name] = @foodtruck.Name

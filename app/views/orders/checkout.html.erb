@@ -10,7 +10,7 @@
 
 <section id="checkout" class="py-4">
   <div class="container">
-    <h3>Place Order to <%= @truck_info["truck_name"] %></h3>
+    <h3>Place Order to <%= @truck_info["Name"] %></h3>
     <hr>
     <div class="row">
       <div class="col-md-12">
@@ -28,11 +28,11 @@
             <tbody>
             <% @item_list.each_with_index do |item, index| %>
               <tr>
-                <td><%= "#{index + 1}" %></td>
-                <td><%= item["item_img"] %></td>
-                <td><%= "#{item["item_name"]}" %></td>
-                <td><%= "$ #{item["item_price"]}" %></td>
-                <td><%= "#{item["quantity"]}" %></td>
+                <td><%= index + 1 %></td>
+                <td><%= item[:item_img] %></td>
+                <td><%= item[:item_name] %></td>
+                <td><%= "$ #{item[:item_price]}" %></td>
+                <td><%= item[:quantity] %></td>
               </tr>
             <% end %>
             </tbody>
@@ -43,7 +43,7 @@
 
     <div align="right">
       <h5><%= "Order Subtotal: $ #{@order_subtotal}" %></h5>
-      <%#= link_to 'Go Back Edit', "/foodtrucks/#{@truck_info['truck_id']}", class: 'btn btn-primary btn-sm' %>
+      <%= link_to 'Go Back Edit', "/foodtrucks/#{@truck_info[:id]}", class: 'btn btn-primary btn-sm' %>
       <%= link_to 'Place Order', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal),
                   method: :post, class: 'btn btn-secondary btn-sm' %>
     </div>

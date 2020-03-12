@@ -44,86 +44,89 @@ class MenuitemsController < ApplicationController
   end
 
   def add
-    found = 0
-
-    foodtruck = Foodtruck.where("id = #{params['foodtruck_id']}")
-    if foodtruck.nil? || foodtruck.empty?
-      logger.warn "No food truck found"
+    truck = Foodtruck.where("id = #{params['foodtruck_id']}")
+    if truck.nil? || truck.empty?
+      logger.warn 'No food truck found'
       return
     end
-    @foodtruck = foodtruck[0]
+    truck = truck[0]
+    @foodtruck = truck
+    logger.info "truck: #{@foodtruck.as_json}"
 
-    menuitem = Menuitem.where("id = #{params['menuitem_id']}")
-    if menuitem.nil? || menuitem.empty?
-      logger.warn "No menu item found"
+    menu_item = Menuitem.where("id = #{params['menuitem_id']}")
+    if menu_item.nil? || menu_item.empty?
+      logger.warn 'No menu item found'
       return
     end
-    @menuitem = menuitem[0]
-
-    logger.info "menu item id: #{@menuitem[:id]}"
-    logger.info "In add: session items = #{session[:items]}"
+    @menuitem = menu_item[0]
 
     item_id = @menuitem.id.to_s
-    if session[:items].key?(item_id)
-      session[:items][item_id]["quantity"] += 1
+
+    key = "#{current_user.id}_#{truck.id}"
+    user_cart_str = $redis.get key
+    if user_cart_str.nil?
+      user_cart_str = '{}'
+    end
+
+    user_cart = eval(user_cart_str)
+
+    if user_cart.key?(item_id)
+      user_cart[item_id][:quantity] += 1
     else
       new_item = {}
       new_item[:item_id] = @menuitem.id
       new_item[:item_name] = @menuitem.Name
       new_item[:item_price] = @menuitem.price
-      new_item[:item_img] = ""
+      new_item[:item_img] = ''
       new_item[:quantity] = 1
-      session[:items][item_id] = new_item
+      user_cart[item_id] = new_item
     end
-    # session[:items].each do |item|
-    #   logger.info "menuitem name: #{@menuitem[:Name]}"
-    #   logger.info "item name: #{item["item_name"]}"
-    #   if @menuitem[:Name].eql? item["item_name"]
-    #     item["quantity"] += 1
-    #     found = 1
-    #   end
-    # end
-    # if found == 0
-    #   new_item = {}
-    #   new_item[:item_id] = @menuitem.id
-    #   new_item[:item_name] = @menuitem.Name
-    #   new_item[:item_price] = @menuitem.price
-    #   new_item[:item_img] = ""
-    #   new_item[:quantity] = 1
-    #   session[:items].push(new_item)
-    # end
 
-    logger.info "In add before redirect: session items = #{session[:items]}"
+    $redis.set(key, user_cart.inspect)
 
-    # render  "/foodtrucks/#{params[:foodtruck_id]}"
+    logger.info "user cart: #{user_cart}"
+    @cart = user_cart.nil? ? {} : user_cart
+
     render '/foodtrucks/show'
   end
 
   def remove
-    @foodtruck = Foodtruck.find(params[:foodtruck_id])
-    @menuitem = @foodtruck.menuitems.find(params[:menuitem_id])
-
-    # logger.info "In remove: session items = #{session[:items]}"
-    # session[:items].each do |item|
-    #   if @menuitem[:Name].eql? item["item_name"]
-    #     item["quantity"] -= 1
-    #     if item["quantity"] == 0
-    #       session[:items].delete(item)
-    #     end
-    #   end
-    # end
-    item_id = @menuitem.id.to_s
-    if session[:items].key?(item_id)
-      if session[:items][item_id]['quantity'] > 0
-        session[:items][item_id]['quantity'] -= 1
-      end
-      if session[:items][item_id]['quantity'] == 0
-        session[:items].delete(item_id)
-      end
+    truck = Foodtruck.where("id = #{params['foodtruck_id']}")
+    if truck.nil? || truck.empty?
+      logger.warn 'No food truck found'
+      return
     end
-    logger.info "After remove: session items = #{session[:items]}"
+    truck = truck[0]
+    @foodtruck = truck
 
-    # redirect_to  "/foodtrucks/#{params[:foodtruck_id]}"
+    menu_item = Menuitem.where("id = #{params['menuitem_id']}")
+    if menu_item.nil? || menu_item.empty?
+      logger.warn 'No menu item found'
+      return
+    end
+    @menuitem = menu_item[0]
+
+    item_id = @menuitem.id.to_s
+
+    key = "#{current_user.id}_#{truck.id}"
+    user_cart_str = $redis.get key
+    if user_cart_str.nil?
+      user_cart_str = '{}'
+    end
+
+    user_cart = eval(user_cart_str)
+
+    if user_cart.key?(item_id)
+      if user_cart[item_id][:quantity].positive?
+        user_cart[item_id][:quantity] -= 1
+      end
+      user_cart.delete(item_id) if user_cart[item_id][:quantity].zero?
+    end
+
+    $redis.set(key, user_cart.inspect)
+
+    @cart = user_cart.nil? ? {} : user_cart
+
     render '/foodtrucks/show'
   end
 

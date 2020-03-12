@@ -38,36 +38,48 @@ class OrdersController < ApplicationController
 
   # Checkout
   def checkout
-    logger.info 'Run here in checkout'
-    @truck_info = session[:foodtruck]
-    logger.info "@truck_info: #{@truck_info}"
-    item_obj = session[:items].values
-    logger.info "session items: #{session["items"]}"
-    item_list = []
-    item_obj.each do |item|
-      # logger.info "key: #{item}"
-      item_list.push(item)
+    truck_id = params[:truck]
 
+    truck = Foodtruck.where("id = #{truck_id}")
+    if truck.empty?
+      logger.error "Failed to checkout. No truck with id #{truck_id}"
+      raise 'No such Truck'
+    end
+    @truck_info = truck[0]
+    logger.info "Truck: #{@truck_info.as_json}"
+
+    key = "#{current_user.id}_#{truck_id}"
+    item_obj = eval($redis.get key)
+
+    item_list = []
+    item_obj.each do |_, item|
+      item_list.push(item)
     end
     @item_list = item_list
-    logger.info "item list #{@item_list}"
 
     subtotal = 0
     item_list.each do |item|
-      subtotal += item['quantity'].to_i * item['item_price'].to_f
+      subtotal += item[:quantity].to_i * item[:item_price].to_f
     end
 
-    @order_subtotal = subtotal
+    @order_subtotal = subtotal.round(2)
+
   end
 
   # Place order
   def place
     logger.info 'Run here in place order'
     logger.info "API Params: #{params}"
-    @truck = params[:truck]
     @item_list = params[:items]
     @user_id = current_user.id
     @order_subtotal = params[:subtotal].to_f
+
+    truck = params['truck']
+    @truck = Foodtruck.find(truck)
+    if @truck.nil?
+      logger.error "Failed to place order. No truck with id #{truck}"
+      raise 'No such truck'
+    end
 
     # generate order no
     order_no = generate_order_no
@@ -78,9 +90,9 @@ class OrdersController < ApplicationController
       # 1. create order
       new_order = {}
       new_order[:order_no] = order_no
-      new_order[:truck_id] = @truck[:truck_id]
-      new_order[:truck_name] = @truck[:truck_name]
-      new_order[:truck_img] = @truck[:truck_img]
+      new_order[:truck_id] = @truck[:id]
+      new_order[:truck_name] = @truck[:Name]
+      new_order[:truck_img] = ''
       new_order[:order_subtotal] = @order_subtotal
       new_order[:order_status] = 2
       new_order[:user_id] = @user_id
@@ -105,6 +117,10 @@ class OrdersController < ApplicationController
         logger.info "Item #{index + 1} created for order #{order_no}"
       end
     end
+
+    # delete key from redis
+    key = "#{current_user.id}_#{truck}"
+    $redis.del key
 
     logger.info "Create order #{order_no} completed!"
 
