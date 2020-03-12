@@ -49,7 +49,8 @@ class OrdersController < ApplicationController
     logger.info "Truck: #{@truck_info.as_json}"
 
     key = "#{current_user.id}_#{truck_id}"
-    item_obj = eval($redis.get key)
+    item_obj_str = $redis.get key
+    item_obj = (item_obj_str.nil? || item_obj_str == '') ? {} : eval(item_obj_str)
 
     item_list = []
     item_obj.each do |_, item|
