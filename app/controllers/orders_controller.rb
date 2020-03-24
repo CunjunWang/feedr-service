@@ -182,9 +182,6 @@ class OrdersController < ApplicationController
         raise Exception 'Fail to send message, no such food truck!'
       end
 
-      # logger.info "Truck #{truck.as_json}"
-      # logger.info "User #{user.as_json}"
-
       truck_name = truck.Name
       address = truck.Address
       username = user.first_name
@@ -196,6 +193,42 @@ class OrdersController < ApplicationController
     end
 
     # reload the page
+    redirect_to '/orders/my'
+  end
+
+  def complete
+    logger.info "param = #{params}"
+    order_no = params[:order_no]
+    session_id = params[:session_id]
+
+    # check whether the order to update exists
+    origin_order = Order.find_by_order_no(order_no)
+    if origin_order.nil?
+      logger.error "Fail to update order [#{order_no}] status, order does not exist!"
+      raise Exception 'Invalid order'
+    end
+
+    # transactional operation
+    ActiveRecord::Base.transaction do
+      # 1. Update the order status
+      origin_order.order_status = 2
+      origin_order.updated_at = Time.new
+      origin_order.save
+
+      # 2. add a new update record
+      new_update_record = {}
+      new_update_record[:order_id] = origin_order.id
+      new_update_record[:order_no] = origin_order.order_no
+      new_update_record[:before_update_status_code] = '/'
+      new_update_record[:before_update_status] = '/'
+      new_update_record[:after_update_status_code] = 2
+      new_update_record[:after_update_status] = 'PREPARING'
+      new_update_record[:operator_id] = current_user.id
+      new_update_record[:operator_name] = "#{current_user.first_name} #{current_user.last_name}"
+      OrderUpdateRecord.create(new_update_record)
+    end
+
+    # reload page
     redirect_to '/orders/my'
   end
 

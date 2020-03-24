@@ -4,12 +4,11 @@ module PaymentHelper
 
   def create_session(truck, user, order)
     logger.info "request url: #{request.original_url}"
-    host = "localhost:3000"
-    # logger.info "host: #{host}"
+    host = 'localhost:3000'
     Stripe::Checkout::Session.create(
         {
             payment_method_types: ['card'],
-            success_url: "http://#{host}/orders/my",
+            success_url: "http://#{host}/orders/complete/#{order.order_no}?session_id={CHECKOUT_SESSION_ID}",
             cancel_url: "http://#{host}/orders/my",
             customer_email: user.email,
             client_reference_id: order.order_no,
