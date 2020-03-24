@@ -45,8 +45,8 @@
       <div align="right">
         <h5><%= "Order Subtotal: $ #{@order_subtotal}" %></h5>
         <%= link_to 'Go Back Edit', "/foodtrucks/#{@truck_info[:id]}", class: 'btn btn-primary btn-sm' %>
-        <%= link_to 'Place Order', orders_create_path(user: @user, truck: @truck_info, items: @item_list, subtotal: @order_subtotal),
-                    method: :post, class: 'btn btn-secondary btn-sm' %>
+        <%= content_tag(:a, 'Place Order', class: 'btn btn-secondary btn-sm', id: 'place-order',
+                        data: {truck: @truck_id}) %>
       </div>
     <% end %>
   </div>

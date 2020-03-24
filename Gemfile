@@ -25,6 +25,9 @@ gem 'redis'
 # Semd sms message with twilio
 gem 'twilio-ruby'
 
+# payment - stripe
+gem 'stripe'
+
 gem 'pg'
 
 gem 'geocoder'

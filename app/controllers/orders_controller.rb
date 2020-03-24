@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   include OrdersHelper
   include SmsHelper
+  include PaymentHelper
 
   # My order
   def my
@@ -39,6 +42,7 @@ class OrdersController < ApplicationController
   # Checkout
   def checkout
     truck_id = params[:truck]
+    @truck_id = truck_id
 
     truck = Foodtruck.where("id = #{truck_id}")
     if truck.empty?
@@ -49,63 +53,59 @@ class OrdersController < ApplicationController
     logger.info "Truck: #{@truck_info.as_json}"
 
     key = "#{current_user.id}_#{truck_id}"
-    item_obj_str = $redis.get key
-    item_obj = (item_obj_str.nil? || item_obj_str == '') ? {} : eval(item_obj_str)
+    @item_list = get_item_list key
 
-    item_list = []
-    item_obj.each do |_, item|
-      item_list.push(item)
+    subtotal = 0
+    @item_list.each do |item|
+      subtotal += item[:quantity].to_i * item[:item_price].to_f
     end
-    @item_list = item_list
+
+    @order_subtotal = subtotal.round(2)
+  end
+
+  # Place order
+  def place
+    truck_id = params[:truckId]
+    user_id = current_user.id
+
+    key = "#{user_id}_#{truck_id}"
+    item_list = get_item_list key
 
     subtotal = 0
     item_list.each do |item|
       subtotal += item[:quantity].to_i * item[:item_price].to_f
     end
 
-    @order_subtotal = subtotal.round(2)
-
-  end
-
-  # Place order
-  def place
-    logger.info 'Run here in place order'
-    logger.info "API Params: #{params}"
-    @item_list = params[:items]
-    @user_id = current_user.id
-    @order_subtotal = params[:subtotal].to_f
-
-    truck = params['truck']
-    @truck = Foodtruck.find(truck)
-    if @truck.nil?
-      logger.error "Failed to place order. No truck with id #{truck}"
+    truck = Foodtruck.find(truck_id)
+    if truck.nil?
+      logger.error "Failed to place order. No truck with id #{truck_id}"
       raise 'No such truck'
     end
 
-    # generate order no
+    # 1. generate order no
     order_no = generate_order_no
     logger.info "New order no generated: #{order_no}"
 
-    # transactional place the order
+    # 2. transactional place the order
+    new_order = {}
     ActiveRecord::Base.transaction do
-      # 1. create order
-      new_order = {}
+      # (1). create order, status = 1 'NOT PAID'
       new_order[:order_no] = order_no
-      new_order[:truck_id] = @truck[:id]
-      new_order[:truck_name] = @truck[:Name]
+      new_order[:truck_id] = truck[:id]
+      new_order[:truck_name] = truck[:Name]
       new_order[:truck_img] = ''
-      new_order[:order_subtotal] = @order_subtotal
-      new_order[:order_status] = 2
-      new_order[:user_id] = @user_id
+      new_order[:order_subtotal] = subtotal
+      new_order[:order_status] = 1
+      new_order[:user_id] = user_id
       # replace the order object with the result of db insertion to get id
       new_order = Order.create(new_order)
 
-      # 2. get id after saving to the db
+      # (2). get id after saving to the db
       new_order_id = new_order[:id]
       logger.info "New order created: #{new_order_id}"
 
-      # 3. create each items
-      @item_list.each_with_index do |item, index|
+      # (3). create each items
+      item_list.each_with_index do |item, index|
         new_item = {}
         new_item[:order_id] = new_order_id
         new_item[:order_no] = order_no
@@ -119,13 +119,15 @@ class OrdersController < ApplicationController
       end
     end
 
-    # delete key from redis
-    key = "#{current_user.id}_#{truck}"
+    # 3.delete key from redis
     $redis.del key
 
     logger.info "Create order #{order_no} completed!"
 
-    redirect_to '/orders/my'
+    # 4. create checkout session and go to stripe payment page
+    checkout_session = create_session(truck, current_user, new_order)
+
+    render json: {status: 200, session: checkout_session}
   end
 
   # update order status

@@ -90,4 +90,15 @@ module OrdersHelper
     [need_notify, next_status]
   end
 
+  def get_item_list(redis_key)
+    item_obj_str = $redis.get redis_key
+    item_obj = (item_obj_str.nil? || item_obj_str == '') ? {} : eval(item_obj_str)
+
+    item_list = []
+    item_obj.each do |_, item|
+      item_list.push(item)
+    end
+
+    item_list
+  end
 end
