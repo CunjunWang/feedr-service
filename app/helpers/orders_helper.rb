@@ -69,10 +69,14 @@ module OrdersHelper
 
     # check if the order is placed by me
     order_user_id = order.user_id.to_i
-    if user_id == order_user_id && order_status == 3
-      return 'Complete'
+    if user_id == order_user_id
+      if order_status == 1
+        return 'Pay'
+      end
+      if order_status == 3
+        return 'Complete'
+      end
     end
-
     ''
   end
 

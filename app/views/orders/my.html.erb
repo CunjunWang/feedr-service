@@ -55,9 +55,16 @@
                 <td><%= "#{order.created_at}" %></td>
                 <td>
                   <%= link_to 'Detail', "/orders/detail/#{order.order_no}", class: 'btn btn-secondary btn-sm' %>
-                  <% if get_update_order_link_text(order, @my_trucks) != '' %>
-                    <%= link_to get_update_order_link_text(order, @my_trucks), orders_update_path(:order_no => order.order_no, :status => order.order_status),
-                                :method => :post, class: 'btn btn-primary btn-sm' %>
+                  <% text = get_update_order_link_text(order, @my_trucks) %>
+                  <% if text != '' %>
+                    <% if text == 'Pay' %>
+                      <% puts "in html: #{order.as_json}" %>
+                      <%= content_tag(:a, 'Pay Order', class: 'btn btn-secondary btn-sm', id: 'pay-order',
+                                      data: {order: order.order_no}) %>
+                    <% else %>
+                      <%= link_to get_update_order_link_text(order, @my_trucks), orders_update_path(:order_no => order.order_no, :status => order.order_status),
+                                  :method => :post, class: 'btn btn-primary btn-sm' %>
+                    <% end %>
                   <% end %>
                 </td>
               </tr>

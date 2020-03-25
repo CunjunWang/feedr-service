@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   get '/orders/my', to: 'orders#my'
   get '/orders/detail/:order_no', to: 'orders#detail'
   get '/orders/checkout', to: 'orders#checkout'
+  get '/orders/complete/:order_no', to: 'orders#complete'
   post '/orders/create', to: 'orders#place'
   post '/orders/update', to: 'orders#update_status'
-  get '/orders/complete/:order_no', to: 'orders#complete'
+  post '/orders/pay', to: 'orders#pay'
 
   resources :foodtrucks do
     resources :menuitems do

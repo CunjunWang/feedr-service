@@ -16,3 +16,18 @@ export const checkout_order = async (truckId) => {
         console.log(err);
     }
 };
+
+export const pay_order = async (order_no) => {
+    try {
+        // 1. get the session from the server
+        const data = {order_no};
+        console.log(`data: ${JSON.stringify(data)}`);
+        const session = await axios.post(`/orders/pay`, data);
+        console.log(`session: ${JSON.stringify(session)}`);
+
+        // 2. create checkout form + charge the credit card
+        await stripe.redirectToCheckout({sessionId: session.data.session.id});
+    } catch (err) {
+        console.log(err);
+    }
+};
