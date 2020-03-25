@@ -125,7 +125,7 @@ class OrdersController < ApplicationController
     logger.info "Create order #{order_no} completed!"
 
     # 4. create checkout session and go to stripe payment page
-    checkout_session = create_session(truck, current_user, new_order, false)
+    checkout_session = create_session(truck, current_user, new_order)
 
     render json: {status: 200, session: checkout_session}
   end
@@ -196,6 +196,29 @@ class OrdersController < ApplicationController
     redirect_to '/orders/my'
   end
 
+  def pay
+    order_no = params[:order_no]
+
+    # check whether the order to update exists
+    origin_order = Order.find_by_order_no(order_no)
+    if origin_order.nil?
+      logger.error "Fail to update order [#{order_no}] status, order does not exist!"
+      raise Exception 'Invalid order'
+    end
+
+    truck_id = origin_order.truck_id
+    trucks = Foodtruck.where("id = #{truck_id}")
+    if trucks.nil? || trucks.empty?
+      logger.error "Failed to checkout. No truck with id #{truck_id}"
+      raise 'No such Truck'
+    end
+    truck = trucks[0]
+
+    checkout_session = create_session(truck, current_user, origin_order)
+
+    render json: {status: 200, session: checkout_session}
+  end
+
   def complete
     logger.info "param = #{params}"
     order_no = params[:order_no]
@@ -215,14 +238,18 @@ class OrdersController < ApplicationController
       origin_order.updated_at = Time.new
       origin_order.save
 
+      origin_order_status = origin_order.order_status
+      _, next_status = get_next_status origin_order_status
+
       # 2. add a new update record
       new_update_record = {}
       new_update_record[:order_id] = origin_order.id
       new_update_record[:order_no] = origin_order.order_no
-      new_update_record[:before_update_status_code] = '/'
-      new_update_record[:before_update_status] = '/'
-      new_update_record[:after_update_status_code] = 2
-      new_update_record[:after_update_status] = 'PREPARING'
+      new_update_record[:before_update_status_code] = origin_order_status
+      new_update_record[:before_update_status] =
+          origin_order_status == 1 ? '/' : (transform_order_status origin_order_status)
+      new_update_record[:after_update_status_code] = next_status
+      new_update_record[:after_update_status] = transform_order_status next_status
       new_update_record[:operator_id] = current_user.id
       new_update_record[:operator_name] = "#{current_user.first_name} #{current_user.last_name}"
       OrderUpdateRecord.create(new_update_record)
@@ -230,49 +257,6 @@ class OrdersController < ApplicationController
 
     # reload page
     redirect_to '/orders/my'
-  end
-
-  def pay
-    order_no = params[:order_no]
-
-    # check whether the order to update exists
-    origin_order = Order.find_by_order_no(order_no)
-    if origin_order.nil?
-      logger.error "Fail to update order [#{order_no}] status, order does not exist!"
-      raise Exception 'Invalid order'
-    end
-
-    truck_id = origin_order.truck_id
-    trucks = Foodtruck.where("id = #{truck_id}")
-    if trucks.nil? || trucks.empty?
-      logger.error "Failed to checkout. No truck with id #{truck_id}"
-      raise 'No such Truck'
-    end
-    truck = trucks[0]
-
-    # transactional operation
-    ActiveRecord::Base.transaction do
-      # 1. Update the order status
-      origin_order.order_status = 2
-      origin_order.updated_at = Time.new
-      origin_order.save
-
-      # 2. add a new update record
-      new_update_record = {}
-      new_update_record[:order_id] = origin_order.id
-      new_update_record[:order_no] = origin_order.order_no
-      new_update_record[:before_update_status_code] = 1
-      new_update_record[:before_update_status] = 'NOT PAID'
-      new_update_record[:after_update_status_code] = 2
-      new_update_record[:after_update_status] = 'PREPARING'
-      new_update_record[:operator_id] = current_user.id
-      new_update_record[:operator_name] = "#{current_user.first_name} #{current_user.last_name}"
-      OrderUpdateRecord.create(new_update_record)
-    end
-
-    checkout_session = create_session(truck, current_user, origin_order, true)
-
-    render json: {status: 200, session: checkout_session}
   end
 
 end

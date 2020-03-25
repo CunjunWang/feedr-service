@@ -82,7 +82,9 @@ module OrdersHelper
 
   def get_next_status(current_status)
     need_notify = false
-    if current_status == 2
+    if current_status == 1
+      next_status = 2
+    elsif current_status == 2
       next_status = 3
       need_notify = true
     elsif current_status == 3
