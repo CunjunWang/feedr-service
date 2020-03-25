@@ -3,33 +3,39 @@
     <div class="home-search p-5">
       <div class="overlay p-5">
         <h1 class="display-4 mb-4">
-          Where's My Foodtruck?
+          Where's My Food Truck?
         </h1>
-        <p class="lead">We’ll help find the best foodtrucks around.</p>
+        <p class="lead description-text">We’ll help find the best food trucks around.</p>
         <div class="search">
           <%= form_tag '/' do %>
             <div class="form-row">
-              <div class="col-md-4 mb-3">
-                <%= text_field_tag :Name, @query[:Name], class: 'form-control', placeholder: 'Name' %>
+              <div class="col-md-4 mb-3 input-icon">
+                <i class="fas fa-truck-moving input-icon__icon"></i>
+                <%= text_field_tag :Name, @query[:Name], class: 'form-control', placeholder: "Truck Name" %>
               </div>
               <div class="col-md-4 mb-3">
                 <%= select_tag :Type, options_for_select(['Type (All)', 'American', 'Chinese'], :selected => @query[:Type]), class: 'form-control' %>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-4 mb-3 input-icon">
+                <i class="far fa-user input-icon__icon"></i>
                 <%= text_field_tag :Owner, @query[:Owner], class: 'form-control', placeholder: 'Owner' %>
               </div>
             </div>
             <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <%= text_area_tag :Address, @query[:Address], class: 'form-control', placeholder: 'Address' %>
+              <div class="col-md-6 mb-3 input-icon">
+                <i class="fas fa-map-marked-alt input-icon__icon"></i>
+                <%= text_field_tag :Address, @query[:Address], class: 'form-control', placeholder: 'Address' %>
               </div>
-              <div class="col-md-6 mb-3">
-                <%= text_area_tag :Description, @query[:Description], class: 'form-control', placeholder: 'Description' %>
+              <div class="col-md-6 mb-3 input-icon">
+                <i class="far fa-file-alt input-icon__icon"></i>
+                <%= text_field_tag :Description, @query[:Description], class: 'form-control', placeholder: 'Description' %>
               </div>
             </div>
-            <p>
-              <%= submit_tag 'Search', class: "btn btn-secondary btn-block mt-4" %>
-            </p>
+            <div>
+              <%= button_tag(type: 'submit', class: "btn btn-primary btn-block mt-4") do %>
+                <i class="fas fa-search"></i> Search the TRUCK!
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>

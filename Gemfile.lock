@@ -108,6 +108,8 @@ GEM
     ffi (1.12.2-x86-mingw32)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
+    font-awesome-sass (5.12.0)
+      sassc (>= 1.11)
     geocoder (1.6.1)
     gherkin (5.1.0)
     globalid (0.4.2)
@@ -261,6 +263,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   font-awesome-rails
+  font-awesome-sass (~> 5.12.0)
   geocoder
   jbuilder (~> 2.7)
   pg

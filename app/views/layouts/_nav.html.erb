@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark nav-background sticky-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Feedr</a>
+      <a class="navbar-brand" href="/"><i class="fas fa-utensils"></i>&nbsp; Feedr</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="navbar-nav">
@@ -13,7 +13,6 @@
         <% if logged_in? %>
           <li><%= link_to "Dashboard", '/users/show', class: 'nav-link' %></li>
           <li><%= link_to "Logout", '/logout', method: :get, class: 'nav-link' %></li>
-
         <% else %>
           <li><%= link_to "Login", '/login', method: :get, class: 'nav-link' %></li>
           <li><%= link_to "Sign Up", '/users/new', method: :get, class: 'nav-link' %></li>
@@ -22,104 +21,3 @@
     </div>
   </div>
 </nav>
-
-<!-- Navbar -->
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">-->
-<!--  <div class="container">-->
-<!--    <a class="navbar-brand" href="{% url 'index' %}">-->
-<!--      <img src="{% static 'img/logo.png' %}" class="logo" alt="">-->
-<!--    </a>-->
-<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">-->
-<!--      <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">-->
-<!--      <ul class="navbar-nav">-->
-
-<!--        <li-->
-<!--          {% if '/' == request.path %}-->
-<!--        class="nav-item active mr-3"-->
-<!--        {% else %}-->
-<!--        class="nav-item mr-3"-->
-<!--        {% endif %}-->
-<!--        >-->
-<!--        <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>-->
-<!--        </li>-->
-<!--        <li-->
-<!--          {% if '/listings/search' in request.path %}-->
-<!--        class="nav-item active mr-3"-->
-<!--        {% else %}-->
-<!--        class="nav-item mr-3"-->
-<!--        {% endif %}>-->
-<!--        <a class="nav-link" href="{% url 'search' %}"><i class="fas fa-search"></i> Search</a>-->
-<!--        </li>-->
-
-<!--        <li-->
-<!--          {% if '/listings' in request.path and '/listings/search' not in request.path %}-->
-<!--        class="nav-item active mr-3"-->
-<!--        {% else %}-->
-<!--        class="nav-item mr-3"-->
-<!--        {% endif %}>-->
-<!--        <a class="nav-link" href="{% url 'listings' %}"><i class="fas fa-list"></i> Featured Listings</a>-->
-<!--        {#                </li>#}-->
-<!--        {#                <li#}-->
-<!--        {#                        {% if '/about' in request.path %}#}-->
-<!--        {#                            class="nav-item active mr-3"#}-->
-<!--        {#                        {% else %}#}-->
-<!--        {#                            class="nav-item mr-3"#}-->
-<!--        {#                        {% endif %}#}-->
-<!--        {#                >#}-->
-<!--        {#                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-linkedin-in"></i> About</a>#}-->
-<!--        {#                </li>#}-->
-<!--      </ul>-->
-
-<!--      <ul class="navbar-nav ml-auto">-->
-<!--        {% if user.is_authenticated %}-->
-<!--        <li-->
-<!--          {% if '/dashboard' in request.path %}-->
-<!--        class="nav-item active mr-3"-->
-<!--        {% else %}-->
-<!--        class="nav-item mr-3"-->
-<!--        {% endif %}>-->
-<!--        <a class="nav-link" href="{% url 'dashboard' %}">-->
-<!--          <i class="fas fa-user"></i>-->
-<!--          Dashboard</a>-->
-<!--        </li>-->
-<!--        {% if user.is_staff %}-->
-<!--        <a class="nav-link" href="/admin">-->
-<!--          <i class="fas fa-user-shield"></i>-->
-<!--          Admin</a>-->
-<!--        {% endif %}-->
-<!--        <li class="nav-item mr-3">-->
-<!--          <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">-->
-<!--            <i class="fas fa-power-off"></i> Logout</a>-->
-<!--          <form action="{% url 'logout' %}" method='POST' id="logout">-->
-<!--            {% csrf_token %}-->
-<!--            <input type="hidden"/>-->
-<!--          </form>-->
-<!--        </li>-->
-<!--        {% else %}-->
-<!--        <li-->
-<!--          {% if '/register' in request.path %}-->
-<!--        class="nav-item active mr-3"-->
-<!--        {% else %}-->
-<!--        class="nav-item mr-3"-->
-<!--        {% endif %}>-->
-<!--        <a class="nav-link" href="{% url 'register' %}">-->
-<!--          <i class="fas fa-user-plus"></i> Register</a>-->
-<!--        </li>-->
-<!--        <li-->
-<!--          {% if '/login' in request.path %}-->
-<!--        class="nav-item active mr-3"-->
-<!--        {% else %}-->
-<!--        class="nav-item mr-3"-->
-<!--        {% endif %}>-->
-<!--        <a class="nav-link" href="{% url 'login' %}">-->
-<!--          <i class="fas fa-sign-in-alt"></i>-->
-
-<!--          Login</a>-->
-<!--        </li>-->
-<!--        {% endif %}-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</nav>-->
