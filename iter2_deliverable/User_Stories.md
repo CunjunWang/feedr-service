@@ -1,4 +1,4 @@
-# Detailed User Stories and Operation Steps for Feedr Iteration 1
+# Detailed User Stories and Operation Steps for Feedr Iteration 2
 
 ## User Features
 **1. Edit Profile**
