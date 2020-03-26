@@ -219,3 +219,7 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /^I reload page$/ do
+  visit current_path
+end

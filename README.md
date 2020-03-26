@@ -7,6 +7,7 @@ Course project for Columbia University COMS 4156 - Advanced Software Engineering
 - [Jierui Liu](https://github.com/Willincia1124) (UNI: jl5490)
 
 ## Iteration One
+Release Date: 2020/03/06
 ### 1. Background
 We have supported the basic control flow of the whole business cycle in iteration one.
 
@@ -34,5 +35,24 @@ For the `checkout and place order` feature, now we made use of the session in th
  tests on this feature. One potential alternative is Redis, and we will have more discussion on the 
  next iteration.
 
-## TODO:
-1. http://localhost:3000/orders/my 查询结果分页
+## Iteration Two
+Release Date: 2020/04/03
+### 1. Background
+Most of key features were implemented and tested in iteration one. In this iteration, we just integrated some third party APIs
+ to make our functionality more robust. We also changed part of the front-end code to make the application looks better. 
+
+    - Users can now edit profile.
+    - Switched to Redis, instead of using session, for cart.
+    - Implemented Payment flow with Stripe API.
+    - Made the app looks better by adding icons and modifying CSS.
+    - Added some check functions to make application robust.
+
+### 2. Compile and Run & Run the tests
+- All steps are the same as those for iteration 1.
+
+### 3. Comments
+We left some last considerations for the final iteration, includes:
+
+    - Pagination for queries, such as searching for trucks, searching for my orders.
+    - Google map integration.
+    - Make the app looks better.
