@@ -11,7 +11,8 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <% if logged_in? %>
-          <li><%= link_to "Dashboard", '/users/show', class: 'nav-link' %></li>
+          <li class="nav-link"><%= "Hi, #{current_user.first_name} #{current_user.last_name}!" %></li>
+          <li><%= link_to "My Dashboard", '/users/show', class: 'nav-link' %></li>
           <li><%= link_to "Logout", '/logout', method: :get, class: 'nav-link' %></li>
         <% else %>
           <li><%= link_to "Login", '/login', method: :get, class: 'nav-link' %></li>

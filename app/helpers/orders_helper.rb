@@ -1,7 +1,8 @@
 module OrdersHelper
   require 'securerandom'
 
-  def get_all_my_orders(my_trucks, user_id)
+  def get_all_my_orders(my_trucks, user_id, limit)
+    logger.info "limit #{limit}"
     my_orders = []
     # the orders that I placed
     my_placed_order = Order.where("user_id = '#{user_id}'")
@@ -17,6 +18,13 @@ module OrdersHelper
           my_orders.concat(my_truck_order)
         end
       end
+    end
+
+    my_orders.reverse!.sort_by &:created_at
+
+    if limit != -1
+      my_orders = my_orders[0, limit]
+      my_orders
     end
 
     my_orders

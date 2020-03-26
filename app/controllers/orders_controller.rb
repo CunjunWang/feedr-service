@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       @my_trucks = []
     end
 
-    @orders = get_all_my_orders(@my_trucks, user_id)
+    @orders = get_all_my_orders(@my_trucks, user_id, -1)
     logger.info "Find #{@orders.length} orders"
   end
 

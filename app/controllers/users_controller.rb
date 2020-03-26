@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = current_user
     @foodtrucks = Foodtruck.where(user_id: current_user.id).order(:created_at)
     user_id = current_user.id
-    @orders = get_all_my_orders(@foodtrucks, user_id)
+    @orders = get_all_my_orders(@foodtrucks, user_id, 5)
     @foodtrucks_ordered = []
     @orders.each do |order|
       @foodtrucks_ordered.push(Foodtruck.find(order.truck_id).Name) unless Foodtruck.find(order.truck_id).nil?
