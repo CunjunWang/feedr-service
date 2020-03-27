@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :avatar
   has_secure_password
   validates :email, presence: true, uniqueness: true
   validates :password, length: {minimum: 6, maximum: 18}

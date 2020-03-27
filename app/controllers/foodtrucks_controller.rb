@@ -13,6 +13,7 @@ class FoodtrucksController < ApplicationController
 
   def edit
     @foodtruck = Foodtruck.find(params[:id])
+    @foodtruck.cover.attach(params[:cover])
     @menuitem_errors = []
   end
 
@@ -47,7 +48,7 @@ class FoodtrucksController < ApplicationController
   def update
     @foodtruck = Foodtruck.find(params[:id])
 
-    if @foodtruck.update(params.require(:foodtruck).permit(:Name, :Type, :Address, :Description, :Owner))
+    if @foodtruck.update(params.require(:foodtruck).permit(:Name, :Type, :Address, :Description, :Owner, :cover))
       redirect_to @foodtruck
     else
       render 'edit'

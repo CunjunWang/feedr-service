@@ -35,6 +35,10 @@
                 <%= f.label :phone %>
                 <%= f.text_field :phone, class: 'form-control' %>
               </div>
+              <div class="form-group">
+                <%= f.label "profile" %>
+                <%= f.file_field :avatar %>
+              </div>
               <%= f.submit 'Sign up', class: "btn btn-secondary btn-block" %>
               <%= link_to 'Login', '/login', class: "btn btn-link" %>
             <% end %>

@@ -10,9 +10,9 @@
             <%= form_with(model: @foodtruck, local: true) do |form| %>
               <% if @foodtruck.errors.any? %>
                 <div id="error_explanation">
-                    <% @foodtruck.errors.full_messages.each do |msg| %>
-                      <div class="alert alert-danger" role="alert"><%= msg %></div>
-                    <% end %>
+                  <% @foodtruck.errors.full_messages.each do |msg| %>
+                    <div class="alert alert-danger" role="alert"><%= msg %></div>
+                  <% end %>
                 </div>
               <% end %>
               <div class="form-group">
@@ -39,8 +39,13 @@
                 <%= form.label :Owner %>
                 <%= form.text_field :Owner, class: 'form-control' %>
               </div>
-                <%= form.submit 'Save', class: "btn btn-secondary btn-block" %>
 
+              <div class="form-group">
+                <%= form.label "Cover" %>
+                <%= form.file_field :cover %>
+              </div>
+
+              <%= form.submit 'Save', class: "btn btn-secondary btn-block" %>
             <% end %>
             <%= link_to 'Back to Foodtruck', foodtruck_path(@foodtruck) %>
           </div>

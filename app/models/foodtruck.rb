@@ -1,4 +1,5 @@
 class Foodtruck < ApplicationRecord
+  has_one_attached :cover
   has_many :menuitems, dependent: :destroy
   validates :Name, presence: true
   validates :Type, presence: true

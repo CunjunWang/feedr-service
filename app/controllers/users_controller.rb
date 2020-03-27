@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @user.avatar.attach(params[:avatar])
   end
 
   def update
@@ -46,6 +47,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name, :phone)
+    params.require(:user).permit(:email, :password, :first_name, :last_name, :phone, :avatar)
   end
 end

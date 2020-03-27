@@ -1,10 +1,22 @@
-<section id="showcase-inner" class="py-5 text-white">
-  <div class="container">
+<section id="showcase-inner">
+  <div style="height: 100%">
+    <div class="showcase-inner-overlay">&nbsp;</div>
+    <% if @foodtruck.cover.attached? %>
+      <img class="showcase-inner-img" src="<%= url_for(@foodtruck.cover) %>" alt="">
+    <% end %>
+  </div>
+  <div class="heading-box">
     <div class="row text-center">
       <div class="col-md-12">
-        <h1 class="display-4"><%= @foodtruck.Name %></h1>
-        <p class="lead"><%= @foodtruck.Type %> Cuisine</p>
-        <p class="lead"><%= @foodtruck.Address %></p>
+        <div class="heading-primary">
+          <span><%= @foodtruck.Name %></span>
+        </div>
+        <div class="heading-tertirary">
+          <span><%= @foodtruck.Type %> Cuisine</span>
+        </div>
+        <div class="heading-tertirary">
+          <span><%= @foodtruck.Address %></span>
+        </div>
       </div>
     </div>
   </div>

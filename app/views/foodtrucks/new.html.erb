@@ -46,6 +46,10 @@
                 <%= form.label :Owner %>
                 <%= form.text_field :Owner, class: 'form-control' %>
               </div>
+              <div class="form-group">
+                <%= form.label "Cover" %>
+                <%= form.file_field :cover %>
+              </div>
               <%= form.submit 'Create', class: "btn btn-secondary btn-block" %>
             <% end %>
           </div>
