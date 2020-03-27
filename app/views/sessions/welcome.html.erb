@@ -51,6 +51,8 @@
           <div class="card listing-preview">
             <% if foodtruck.cover.attached? %>
               <img class="card-img-top" src="<%= url_for(foodtruck.cover) %>" alt="#{foodtruck.Name}">
+            <% else %>
+              <img class="card-img-top" src="/img/showcase.jpg" alt="#{foodtruck.Name}">
             <% end %>
             <div class="card-img-overlay">
               <h2>
