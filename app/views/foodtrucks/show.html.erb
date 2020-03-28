@@ -41,6 +41,7 @@
               <th scope="col">Name</th>
               <th scope="col">Description</th>
               <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
               <th scope="col"></th>
             </tr>
             </thead>
@@ -50,6 +51,9 @@
                 <td><%= item.Name %></td>
                 <td><%= item.Description %></td>
                 <td><%= item.price %></td>
+                <td>
+                  <%= @cart[item.id.to_s].nil? ? 0 : @cart[item.id.to_s][:quantity] %>
+                </td>
                 <td>
                   <% if @foodtruck.user_id == current_user.id %>
                     <%= link_to 'Edit', edit_foodtruck_menuitem_path(item.foodtruck, item), class: 'btn btn-secondary btn-sm' %>
@@ -102,6 +106,6 @@
         });
     }
 </script>
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6kHpm24MjUXHqCxpNk7oIPBW40-Sp0Nc&callback=initMap" async defer></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6kHpm24MjUXHqCxpNk7oIPBW40-Sp0Nc&callback=initMap" async defer></script>
 
 
