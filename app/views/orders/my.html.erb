@@ -19,7 +19,11 @@
     <div class="row">
       <div class="col-md-3">
         <div class="card mb-3">
-          <img class="card-img-top" src="https://cc6998a1chatbot.s3.amazonaws.com/assets/seo-panda-icon.png" alt="">
+          <% if @user.avatar.attached? %>
+            <img class="card-img-top" src="<%= url_for(@user.avatar) %>>" alt="">
+          <% else %>
+            <img class="card-img-top" src="https://cc6998a1chatbot.s3.amazonaws.com/assets/seo-panda-icon.png" alt="">
+          <% end %>
           <div class="card-body">
             <div class="row">
               <div class="col-md-8">

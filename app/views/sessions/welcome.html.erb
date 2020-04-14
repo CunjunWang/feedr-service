@@ -14,7 +14,7 @@
                 <%= text_field_tag :Name, @query[:Name], class: 'form-control', placeholder: "Truck Name" %>
               </div>
               <div class="col-md-4 mb-3">
-                <%= select_tag :Type, options_for_select(['Type (All)', 'American', 'Chinese'], :selected => @query[:Type]), class: 'form-control' %>
+                <%= select_tag :Type, options_for_select(['Type (All)', 'American', 'Chinese', 'Korean', 'Japanese', 'Halal', 'Mongolian'], :selected => @query[:Type]), class: 'form-control' %>
               </div>
               <div class="col-md-4 mb-3 input-icon">
                 <i class="far fa-user input-icon__icon"></i>
