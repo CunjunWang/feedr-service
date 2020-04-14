@@ -1,10 +1,7 @@
 <p>
   <strong>Name:</strong>
   <%= menuitem.Name %>
-  <!--  <strong>Quantity:</strong>-->
-  <%#= !session[:items].nil? && !session[:items][menuitem.id.to_s].nil? ? session[:items][menuitem.id.to_s]["quantity"] : 0 %>
-</p>
-
+  </p>
 <p>
   <strong>Description:</strong>
   <%= menuitem.Description %>
@@ -25,13 +22,10 @@
                 data: {confirm: 'Are you sure?'} %>
   </p>
 <% else %>
-
   <p>
     <%= link_to 'Add to Order', foodtruck_menuitem_add_path(menuitem.foodtruck, menuitem) %>
   </p>
-
   <p>
     <%= link_to 'Remove from Order', foodtruck_menuitem_remove_path(menuitem.foodtruck, menuitem) %>
   </p>
-
 <% end %>

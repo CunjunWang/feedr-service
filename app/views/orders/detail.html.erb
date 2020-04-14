@@ -1,13 +1,13 @@
 <section id="showcase-inner">
   <div style="height: 100%">
     <div class="showcase-inner-overlay">&nbsp;</div>
-    <img class="showcase-inner-img" src="/img/showcase.jpg" alt="">
+    <img class="showcase-inner-img" src="<%= "/img/covers/#{@order.truck_id}_cover.jpg" %>" alt="<%= @order.truck_name %>">
   </div>
   <div class="heading-box">
     <div class="row text-center">
       <div class="col-md-12">
         <div class="heading-primary">
-          <h1 class="display-4">Order Detail</h1>
+          <h1 class="display-4"><%= @order.truck_name %> Order Detail</h1>
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
 <section id="order-detail" class="py-4">
   <div class="container">
     <div class="row">
-      <h3>Order Infomation</h3>
+      <h3><%= @order.truck_name %> Order Infomation</h3>
       <div class="col-md-12">
         <table class="table">
           <thead>

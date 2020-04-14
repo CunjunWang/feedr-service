@@ -49,11 +49,8 @@
       <% @foodtrucks.each do |foodtruck| %>
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card listing-preview">
-            <% if foodtruck.cover.attached? %>
-              <img class="card-img-top" src="<%= url_for(foodtruck.cover) %>" alt="#{foodtruck.Name}">
-            <% else %>
-              <img class="card-img-top" src="/img/showcase.jpg" alt="#{foodtruck.Name}">
-            <% end %>
+            <%#= image_tag "/images/covers/#{foodtruck.id}_cover.jpg", class: "card-img-top", alt: "#{foodtruck.Name}" %>
+            <img class="card-img-top" src="/img/covers/<%= foodtruck.id %>_cover.jpg" alt="<%= "#{foodtruck.Name}" %>">
             <div class="card-img-overlay">
               <h2>
                 <span class="badge badge-secondary text-white"><%= foodtruck.Type %></span>

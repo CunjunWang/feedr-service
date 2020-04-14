@@ -1,15 +1,13 @@
 <section id="showcase-inner">
   <div style="height: 100%">
     <div class="showcase-inner-overlay">&nbsp;</div>
-    <% if @truck_info.cover.attached? %>
-      <img class="showcase-inner-img" src="<%= url_for(@truck_info.cover) %>" alt="">
-    <% end %>
+    <img class="showcase-inner-img" src="<%= "/img/covers/#{@truck_id}_cover.jpg" %>" alt="<%= @truck_info["Name"] %>">
   </div>
   <div class="heading-box">
     <div class="row text-center">
       <div class="col-md-12">
         <div class="heading-primary">
-          <h1 class="display-4">Checkout Order</h1>
+          <h1 class="display-4">Checkout <%= @truck_info["Name"] %> Order</h1>
         </div>
       </div>
     </div>

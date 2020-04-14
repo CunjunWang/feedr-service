@@ -1,21 +1,26 @@
 <section id="showcase-inner">
   <div style="height: 100%">
     <div class="showcase-inner-overlay">&nbsp;</div>
-    <% if @foodtruck.cover.attached? %>
-      <img class="showcase-inner-img" src="<%= url_for(@foodtruck.cover) %>" alt="">
-    <% end %>
+    <img class="showcase-inner-img" src="<%= "/img/covers/#{@foodtruck.id}_cover.jpg" %>" alt="<%= "#{@foodtruck.Name}" %>">
   </div>
   <div class="heading-box">
     <div class="row text-center">
+      <div class="heading-primary">
+        <span><%= @foodtruck.Name %></span>
+      </div>
       <div class="col-md-12">
-        <div class="heading-primary">
-          <span><%= @foodtruck.Name %></span>
-        </div>
-        <div class="heading-tertirary">
-          <span><%= @foodtruck.Type %> Cuisine</span>
-        </div>
-        <div class="heading-tertirary">
-          <span><%= @foodtruck.Address %></span>
+        <div class="heading-box__group">
+          <div class="heading-box__detail">
+            <i class="fas fa-utensils"></i>
+            &nbsp;&nbsp;
+            <span><%= @foodtruck.Type %> Cuisine</span>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="heading-box__detail">
+            <i class="fas fa-map-marked"></i>
+            &nbsp;&nbsp;
+            <span><%= @foodtruck.Address %></span>
+          </div>
         </div>
       </div>
     </div>
