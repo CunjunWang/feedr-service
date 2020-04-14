@@ -62,12 +62,14 @@
             <div class="card-body">
               <div class="listing-heading text-center">
                 <h4 class="text-primary"><%= foodtruck.Name %></h4>
+                <p style="font-style: italic;"><%= foodtruck.Description %></p>
                 <p>
+                  <i class="fas fa-map-marker-alt input-icon__icon"></i>
                   <%= foodtruck.Address %>
                 </p>
               </div>
               <hr>
-              <%= link_to 'Show', foodtruck_path(foodtruck), class: "btn btn-primary btn-block" %>
+              <%= link_to 'Show', foodtruck_path(foodtruck.id), class: "btn btn-primary btn-block" %>
             </div>
           </div>
         </div>
