@@ -62,9 +62,9 @@ Our internal API design abide by the RESTful style, includes:
 ## Project Timeline
 | Iteration | Date | Milestones |
 | --- | --- | --- |
-| Iteration 1 | Feb 11th - Mar 6th, 2020 | [Milestones](#Iteration One) |
-| Iteration 2 | Feb 6th - Apr 3rd, 2020 | [Milestones](#Iteration Two) |
-| Iteration 3 | Apr 3rd - Apr 24th, 2020 | [Milestones](#Final Iteration) |
+| Iteration 1 | Feb 11th - Mar 6th, 2020 | [Milestones](#iteration-one) |
+| Iteration 2 | Feb 6th - Apr 3rd, 2020 | [Milestones](#iteration-two) |
+| Iteration 3 | Apr 3rd - Apr 24th, 2020 | [Milestones](#final-iteration) |
 | Presentation | Apr 28th, 2020 | / |
 | Final Submission | May 11th, 2020 | / |
 
