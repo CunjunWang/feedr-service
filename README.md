@@ -145,6 +145,13 @@ during this term, but since we have those ideas, we are pleased to make them com
 
 ## Agile Workflow
 
+    - Form and refine our idea of creating the food-truck service line
+    - List the modules of this project and basic workflow, functionalities of the application
+    - Assign different roles to each group member based on modules and functionalities
+    - Create goals for each iterations and assign dates to the deadline of each iteration
+    - Arrange group meetings on a bi-weekly basis to exchange ideas, report progress and incorporate our codes
+    - Write Cucumber user-stories and tests to test our workflow and functionality
+    - After each iteration, check our iteration goals and modify future iteration goals based on our progress
 
 
 ## Lessons Learned
