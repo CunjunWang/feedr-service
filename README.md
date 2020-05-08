@@ -155,3 +155,10 @@ during this term, but since we have those ideas, we are pleased to make them com
 
 
 ## Lessons Learned
+    - Agile wordflow and rational
+    - How to build up business models from scratch and finally forms an productive project
+    - Importance of user stories and user test cases
+    - How to coordinate with different teams working on different parts of the same project
+    - How to remain consistent work progress under special circumstances
+    - How to transfer codes into large-scale application using cloud platform service
+    
